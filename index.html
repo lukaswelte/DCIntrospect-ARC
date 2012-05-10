@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Dcintrospect-arc : The cool DCIntrospect Debug Tool ARC ready" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Dcintrospect-arc</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/logicreative/DCIntrospect-ARC">View on GitHub</a>
+
+          <h1 id="project_title">Dcintrospect-arc</h1>
+          <h2 id="project_tagline">The cool DCIntrospect Debug Tool ARC ready</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/logicreative/DCIntrospect-ARC/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/logicreative/DCIntrospect-ARC/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <p>DCIntrospectARC
+@l0gicreative
+<a href="http://lukaswelte.de">http://lukaswelte.de</a></p>
+
+<p>Introspect is small set of tools for iOS done by domesticcat.com.au that aid in debugging user interfaces built with UIKit. It's especially useful for UI layouts that are dynamically created or can change during runtime, or for tuning performance by finding non-opaque views or views that are re-drawing unnecessarily. It's designed for use in the iPhone simulator, but can also be used on a device.</p>
+
+<p>This is the ARC Version of the well known DCIntrospect</p>
+
+<p>It uses keyboard shortcuts to handle starting, ending and other commands. It can also be invoked via an app-wide UIGestureRecognizer if it is to be used on the device.</p>
+
+<p>Features:
+Simple to setup and use
+Controlled via app-wide keyboard commands
+Highlighting of view frames
+Displays a views origin &amp; size, including distances to edges of main window
+Move and resize view frames during runtime using shortcut keys
+Logging of properties of a view, including subclass properties, actions and targets (see below for an example)
+Logging of accessibility properties — useful for UI automation scripts
+Manually call setNeedsDisplay, setNeedsLayout and reloadData (for UITableView)
+Highlight all view outlines
+Highlight all views that are non-opaque
+Shows warning for views that are positioned on non-integer origins (will cause blurriness when drawn)
+Print a views hierarchy to console (via private method recursiveDescription) to console
+Usage
+Before you start make sure the DEBUG environment variable is set. DCIntrospect will not run without that set to prevent it being left in for production use.</p>
+
+<p>Add the DCIntrospect class files to your project, add the QuartzCore framework if needed. To start:</p>
+
+<p>[window makeKeyAndDisplay]</p>
+
+<p>// always call after makeKeyAndDisplay.</p>
+
+<h1>if TARGET_IPHONE_SIMULATOR</h1>
+
+<pre><code>[[DCIntrospect sharedIntrospector] start];
+</code></pre>
+
+<h1>endif</h1>
+
+<p>The #if to target the simulator is not required but is a good idea to further prevent leaving it on in production code.</p>
+
+<p>Once setup, simply push the space bar to invoke the introspect or then start clicking on views to get info. You can also tap and drag around the interface.</p>
+
+<p>A a small demo app is included to test it out.</p>
+
+<p>Selected keyboard shortcuts
+Start/Stop: spacebar
+Help: ?
+Print properties and actions of selected view to console: p
+Print accessibility properties and actions of selected view to console: a
+Toggle all view outlines: o
+Toggle highlighting non-opaque views: O
+Nudge view left, right, up &amp; down: 4 6 8 2 (use the numeric pad) or ← → ↑ ↓
+Print out the selected views' new frame to console after nudge/resize: 0
+Print selected views recursive description to console: v
+Logging selected views properties
+Pushing p will log out the available properties about the selected view. DCIntrospect will try to make sense of the values it can and show more useful info. An example from a UIButton:</p>
+
+<p>** UIRoundedRectButton : UIButton : UIControl : UIView : UIResponder : NSObject **</p>
+
+<p>** UIView properties **
+    tag: 1
+    frame: {{21, 331}, {278, 37}} | bounds: {{0, 0}, {278, 37}} | center: {160, 349.5}
+    transform: [1, 0, 0, 1, 0, 0]
+    autoresizingMask: UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin
+    autoresizesSubviews: YES
+    contentMode: UIViewContentModeScaleToFill | contentStretch: {{0, 0}, {1, 1}} backgroundColor: nil
+    alpha: 1.00 | opaque: NO | hidden: NO | clips to bounds: NO |
+    clearsContextBeforeDrawing: YES
+    userInteractionEnabled: YES | multipleTouchEnabled: NO
+    gestureRecognizers: nil</p>
+
+<p>** UIRoundedRectButton properties **</p>
+
+<p>** Targets &amp; Actions **
+    target:  action: buttonTapped:
+Customizing Key Bindings
+Edit the file DCIntrospectSettings.h to change key bindings. You might want to change the key bindings if your using a laptop/wireless keyboard for development.</p>
+
+<p>License
+Made available under the MIT License.</p>
+
+<p>Collaboration
+If you have any feature requests/bugfixes etc. feel free to help out and send a pull request, or create a new issue.</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Dcintrospect-arc maintained by <a href="https://github.com/logicreative">logicreative</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-29080002-2");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+
+  </body>
+</html>
