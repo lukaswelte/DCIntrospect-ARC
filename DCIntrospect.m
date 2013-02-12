@@ -80,7 +80,7 @@ DCIntrospect *sharedInstance = nil;
 
 #pragma mark Setup
 
-+ (void)load
++ (void)initialize
 {	
 	NSString *simulatorRoot = [[[NSProcessInfo processInfo] environment] objectForKey:@"IPHONE_SIMULATOR_ROOT"];
 	if (simulatorRoot)
