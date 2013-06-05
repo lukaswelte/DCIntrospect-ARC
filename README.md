@@ -1,7 +1,7 @@
 DCIntrospect-ARC
 ================
 
-The cool DCIntrospect Debug Tool ARC ready
+The cool DCIntrospect (by domesticcat) Debug Tool ARC ready
 
 Description of DCIntrospect:
 
