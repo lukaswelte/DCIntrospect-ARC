@@ -1,6 +1,6 @@
-DCIntrospectARC
-[@l0gicreative](http://twitter.com/l0gicreative)
-http://lukaswelte.de
+DCIntrospectARC  
+[@l0gicreative](http://twitter.com/l0gicreative)  
+http://lukaswelte.de  
 
 Introspect was originally done by domesticcat and is small set of tools for iOS that aid in debugging user interfaces built with UIKit.  It's especially useful for UI layouts that are dynamically created or can change during runtime, or for tuning performance by finding non-opaque views or views that are re-drawing unnecessarily.  It's designed for use in the iPhone simulator, but can also be used on a device.
 
