@@ -1,97 +1,110 @@
 <!DOCTYPE html>
 <html>
-
   <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Dcintrospect-arc : The cool DCIntrospect Debug Tool ARC ready" />
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
 
-    <title>Dcintrospect-arc</title>
+    <title>DCIntrospect-ARC by logicreative</title>
   </head>
 
   <body>
+    <header>
+      <div class="inner">
+        <h1>DCIntrospect-ARC</h1>
+        <h2>The cool DCIntrospect Debug Tool ARC ready</h2>
+        <a href="https://github.com/logicreative/DCIntrospect-ARC" class="button"><small>View project on</small>GitHub</a>
+      </div>
+    </header>
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/logicreative/DCIntrospect-ARC">View on GitHub</a>
-
-          <h1 id="project_title">Dcintrospect-arc</h1>
-          <h2 id="project_tagline">The cool DCIntrospect Debug Tool ARC ready</h2>
-
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/logicreative/DCIntrospect-ARC/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/logicreative/DCIntrospect-ARC/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <p>DCIntrospectARC
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <p>DCIntrospectARC
 @l0gicreative
 <a href="http://lukaswelte.de">http://lukaswelte.de</a></p>
 
-<p>Introspect is small set of tools for iOS done by domesticcat.com.au that aid in debugging user interfaces built with UIKit. It's especially useful for UI layouts that are dynamically created or can change during runtime, or for tuning performance by finding non-opaque views or views that are re-drawing unnecessarily. It's designed for use in the iPhone simulator, but can also be used on a device.</p>
+<p>Introspect was originally done by domesticcat and is small set of tools for iOS that aid in debugging user interfaces built with UIKit.  It's especially useful for UI layouts that are dynamically created or can change during runtime, or for tuning performance by finding non-opaque views or views that are re-drawing unnecessarily.  It's designed for use in the iPhone simulator, but can also be used on a device.</p>
 
-<p>This is the ARC Version of the well known DCIntrospect</p>
+<p><img src="http://domesticcat.com.au/projects/introspect/introspectdemo.png" alt="Introspect Demo Image"></p>
 
-<p>It uses keyboard shortcuts to handle starting, ending and other commands. It can also be invoked via an app-wide UIGestureRecognizer if it is to be used on the device.</p>
+<p>It uses keyboard shortcuts to handle starting, ending and other commands.  It can also be invoked via an app-wide <code>UIGestureRecognizer</code> if it is to be used on the device.</p>
 
-<p>Features:
-Simple to setup and use
-Controlled via app-wide keyboard commands
-Highlighting of view frames
-Displays a views origin &amp; size, including distances to edges of main window
-Move and resize view frames during runtime using shortcut keys
-Logging of properties of a view, including subclass properties, actions and targets (see below for an example)
-Logging of accessibility properties — useful for UI automation scripts
-Manually call setNeedsDisplay, setNeedsLayout and reloadData (for UITableView)
-Highlight all view outlines
-Highlight all views that are non-opaque
-Shows warning for views that are positioned on non-integer origins (will cause blurriness when drawn)
-Print a views hierarchy to console (via private method recursiveDescription) to console
-Usage
-Before you start make sure the DEBUG environment variable is set. DCIntrospect will not run without that set to prevent it being left in for production use.</p>
+<h2>
+<a name="features" class="anchor" href="#features"><span class="octicon octicon-link"></span></a>Features:</h2>
 
-<p>Add the DCIntrospect class files to your project, add the QuartzCore framework if needed. To start:</p>
+<ul>
+<li>Simple to setup and use</li>
+<li>Controlled via app-wide keyboard commands</li>
+<li>Highlighting of view frames</li>
+<li>Displays a views origin &amp; size, including distances to edges of main window</li>
+<li>Move and resize view frames during runtime using shortcut keys</li>
+<li>Logging of properties of a view, including subclass properties, actions and targets (see below for an example)</li>
+<li>Logging of accessibility properties — useful for UI automation scripts</li>
+<li>Manually call setNeedsDisplay, setNeedsLayout and reloadData (for UITableView)</li>
+<li>Highlight all view outlines</li>
+<li>Highlight all views that are non-opaque</li>
+<li>Shows warning for views that are positioned on non-integer origins (will cause blurriness when drawn)</li>
+<li>Print a views hierarchy to console (via private method <code>recursiveDescription</code>) to console</li>
+</ul><h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
 
-<p>[window makeKeyAndDisplay]</p>
+<p>Before you start make sure the <code>DEBUG</code> environment variable is set.  DCIntrospect will not run without that set to prevent it being left in for production use.</p>
 
-<p>// always call after makeKeyAndDisplay.</p>
+<p>Add the <code>DCIntrospect</code> class files to your project, add the QuartzCore framework if needed.  To start:</p>
 
-<h1>if TARGET_IPHONE_SIMULATOR</h1>
+<pre><code>[window makeKeyAndDisplay]
 
-<pre><code>[[DCIntrospect sharedIntrospector] start];
+// always call after makeKeyAndDisplay.
+#if TARGET_IPHONE_SIMULATOR
+    [[DCIntrospect sharedIntrospector] start];
+#endif
 </code></pre>
 
-<h1>endif</h1>
+<p>The <code>#if</code> to target the simulator is not required but is a good idea to further prevent leaving it on in production code.</p>
 
-<p>The #if to target the simulator is not required but is a good idea to further prevent leaving it on in production code.</p>
-
-<p>Once setup, simply push the space bar to invoke the introspect or then start clicking on views to get info. You can also tap and drag around the interface.</p>
+<p>Once setup, simply push the space bar to invoke the introspect or then start clicking on views to get info.  You can also tap and drag around the interface.</p>
 
 <p>A a small demo app is included to test it out.</p>
 
-<p>Selected keyboard shortcuts
-Start/Stop: spacebar
-Help: ?
-Print properties and actions of selected view to console: p
-Print accessibility properties and actions of selected view to console: a
-Toggle all view outlines: o
-Toggle highlighting non-opaque views: O
-Nudge view left, right, up &amp; down: 4 6 8 2 (use the numeric pad) or ← → ↑ ↓
-Print out the selected views' new frame to console after nudge/resize: 0
-Print selected views recursive description to console: v
-Logging selected views properties
-Pushing p will log out the available properties about the selected view. DCIntrospect will try to make sense of the values it can and show more useful info. An example from a UIButton:</p>
+<h2>
+<a name="selected-keyboard-shortcuts" class="anchor" href="#selected-keyboard-shortcuts"><span class="octicon octicon-link"></span></a>Selected keyboard shortcuts</h2>
 
-<p>** UIRoundedRectButton : UIButton : UIControl : UIView : UIResponder : NSObject **</p>
+<ul>
+<li>Start/Stop: <code>spacebar</code>
+</li>
+<li>Help: <code>?</code>
+</li>
+<li>Print properties and actions of selected view to console: <code>p</code>
+</li>
+<li>Print accessibility properties and actions of selected view to console: <code>a</code>
+</li>
+<li>Toggle all view outlines: <code>o</code>
+</li>
+<li>Toggle highlighting non-opaque views: <code>O</code>
+</li>
+<li>Nudge view left, right, up &amp; down: <code>4 6 8 2</code> (use the numeric pad) or <code>← → ↑ ↓</code>
+</li>
+<li>Print out the selected views' new frame to console after nudge/resize: <code>0</code>
+</li>
+<li>Print selected views recursive description to console: <code>v</code>
+</li>
+</ul><h2>
+<a name="logging-selected-views-properties" class="anchor" href="#logging-selected-views-properties"><span class="octicon octicon-link"></span></a>Logging selected views properties</h2>
 
-<p>** UIView properties **
+<p>Pushing <code>p</code> will log out the available properties about the selected view.  DCIntrospect will try to make sense of the values it can and show more useful info.  An example from a <code>UIButton</code>:</p>
+
+<pre><code>** UIRoundedRectButton : UIButton : UIControl : UIView : UIResponder : NSObject **
+
+** UIView properties **
     tag: 1
     frame: {{21, 331}, {278, 37}} | bounds: {{0, 0}, {278, 37}} | center: {160, 349.5}
     transform: [1, 0, 0, 1, 0, 0]
@@ -101,32 +114,48 @@ Pushing p will log out the available properties about the selected view. DCIntro
     alpha: 1.00 | opaque: NO | hidden: NO | clips to bounds: NO |
     clearsContextBeforeDrawing: YES
     userInteractionEnabled: YES | multipleTouchEnabled: NO
-    gestureRecognizers: nil</p>
+    gestureRecognizers: nil
 
-<p>** UIRoundedRectButton properties **</p>
+** UIRoundedRectButton properties **
 
-<p>** Targets &amp; Actions **
-    target:  action: buttonTapped:
-Customizing Key Bindings
-Edit the file DCIntrospectSettings.h to change key bindings. You might want to change the key bindings if your using a laptop/wireless keyboard for development.</p>
+** Targets &amp; Actions **
+    target: &lt;DCIntrospectDemoViewController: 0x4c8c0e0&gt; action: buttonTapped:
+</code></pre>
 
-<p>License
-Made available under the MIT License.</p>
+<h2>
+<a name="customizing-key-bindings" class="anchor" href="#customizing-key-bindings"><span class="octicon octicon-link"></span></a>Customizing Key Bindings</h2>
 
-<p>Collaboration
-If you have any feature requests/bugfixes etc. feel free to help out and send a pull request, or create a new issue.</p>
-      </section>
+<p>Edit the file <code>DCIntrospectSettings.h</code> to change key bindings.  You might want to change the key bindings if your using a laptop/wireless keyboard for development.</p>
+
+<h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>Made available under the MIT License.</p>
+
+<h2>
+<a name="collaboration" class="anchor" href="#collaboration"><span class="octicon octicon-link"></span></a>Collaboration</h2>
+
+<p>If you have any feature requests/bugfixes etc. feel free to help out and send a pull request, or create a new issue.</p>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/logicreative/DCIntrospect-ARC/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/logicreative/DCIntrospect-ARC/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/logicreative/DCIntrospect-ARC"></a> is maintained by <a href="https://github.com/logicreative">logicreative</a>.</p>
+
+          <p>This page was generated by <a href="pages.github.com">GitHub Pages</a> using the Architect theme by <a href="http://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
     </div>
 
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Dcintrospect-arc maintained by <a href="https://github.com/logicreative">logicreative</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
-
-              <script type="text/javascript">
+            <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
           </script>
@@ -136,7 +165,6 @@ If you have any feature requests/bugfixes etc. feel free to help out and send a 
             pageTracker._trackPageview();
             } catch(err) {}
           </script>
-
 
   </body>
 </html>
