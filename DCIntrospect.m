@@ -1306,11 +1306,12 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 		if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad)
 			[helpString appendString:@"body { font-size:11pt; width:500px; margin:0 auto; }"];
 		
-		[helpString appendString:@"</style></head><body><h1>DCIntrospect</h1>"];
-		[helpString appendString:@"<p>Created by <a href='http://domesticcat.com.au'>Domestic Cat Software</a> 2011.</p>"];
-		[helpString appendString:@"<p>Twitter: <a href='http://twitter.com/patr'>@patr</a></p>"];
-		[helpString appendString:@"<p>More info and full documentation: <a href='http://domesticcat.com.au/projects/introspect'>domesticcat.com.au/projects/introspect</a></p>"];
-		[helpString appendString:@"<p>GitHub project: <a href='https://github.com/domesticcatsoftware/dcintrospect'>github.com/domesticcatsoftware/dcintrospect/</a></p>"];
+		[helpString appendString:@"</style></head><body><h1>DCIntrospect-ARC</h1>"];
+		[helpString appendString:@"<p>Created  by <a href='http://lukaswelte.de'>Lukas Welte</a> 2013.</p>"];
+		[helpString appendString:@"<p>Twitter: <a href='http://twitter.com/l0gicreative'>@l0gicreative</a></p>"];
+		[helpString appendString:@"<p>More info and full documentation: <a href='http://logicreative.github.io/DCIntrospect-ARC/'>logicreative.github.io/DCIntrospect-ARC/</a></p>"];
+		[helpString appendString:@"<p>GitHub project: <a href='https://github.com/logicreative/DCIntrospect-ARC'>github.com/logicreative/DCIntrospect-ARC/</a></p>"];
+		[helpString appendString:@"<p>Forked from <a href='https://github.com/logicreative/DCIntrospect'>DCIntrospect</a></p>"];
 		
 		[helpString appendString:@"<div class='bindings'><h1>Key Bindings</h1>"];
 		[helpString appendString:@"<p>Edit DCIntrospectSettings.h to change key bindings.</p>"];
