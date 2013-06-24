@@ -1546,23 +1546,29 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
     numClasses = objc_getClassList(classes, numClasses);
 	
     NSMutableArray *result = [NSMutableArray array];
-    for (NSInteger i = 0; i < numClasses; i++)
-    {
-        Class superClass = classes[i];
-        do
-        {
-            superClass = class_getSuperclass(superClass);
-        } while(superClass && superClass != parentClass);
+    if (classes != NULL) {
         
-        if (superClass == nil)
+        for (NSInteger i = 0; i < numClasses; i++)
         {
-            continue;
+            
+            Class superClass = classes[i];
+            do
+            {
+                superClass = class_getSuperclass(superClass);
+            } while(superClass && superClass != parentClass);
+            
+            if (superClass == nil)
+            {
+                continue;
+            }
+            
+            [result addObject:classes[i]];
         }
         
-        [result addObject:classes[i]];
+        free(classes);
     }
-	
-    free(classes);
+    	
+    classes = NULL;
 	
     return result;
 }
