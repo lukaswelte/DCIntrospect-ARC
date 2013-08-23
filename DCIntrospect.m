@@ -68,17 +68,6 @@ static bool AmIBeingDebugged(void)
 DCIntrospect *sharedInstance = nil;
 
 @implementation DCIntrospect
-@synthesize keyboardBindingsOn, showStatusBarOverlay, invokeGestureRecognizer;
-@synthesize on;
-@synthesize handleArrowKeys;
-@synthesize viewOutlines, highlightNonOpaqueViews, flashOnRedraw;
-@synthesize statusBarOverlay;
-@synthesize inputTextView;
-@synthesize frameView;
-@synthesize objectNames;
-@synthesize currentView, originalFrame, originalAlpha;
-@synthesize currentViewHistory;
-@synthesize showingHelp;
 
 #pragma mark Setup
 
@@ -266,16 +255,16 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 - (void)setInvokeGestureRecognizer:(UIGestureRecognizer *)newGestureRecognizer
 {
 	UIWindow *mainWindow = [self mainWindow];
-	[mainWindow removeGestureRecognizer:invokeGestureRecognizer];
+	[mainWindow removeGestureRecognizer:self.invokeGestureRecognizer];
 	
-	invokeGestureRecognizer = nil;
-	[invokeGestureRecognizer addTarget:self action:@selector(invokeIntrospector)];
-	[mainWindow addGestureRecognizer:invokeGestureRecognizer];
+	self.invokeGestureRecognizer = nil;
+	[self.invokeGestureRecognizer addTarget:self action:@selector(invokeIntrospector)];
+	[mainWindow addGestureRecognizer:self.invokeGestureRecognizer];
 }
 
 - (void)setKeyboardBindingsOn:(BOOL)areKeyboardBindingsOn
 {
-	keyboardBindingsOn = areKeyboardBindingsOn;
+	_keyboardBindingsOn = areKeyboardBindingsOn;
 	if (self.keyboardBindingsOn)
 		[self.inputTextView becomeFirstResponder];
 	else
@@ -294,7 +283,7 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 		[self updateStatusBar];
 		[self updateFrameView];
 		
-		if (keyboardBindingsOn)
+		if (self.keyboardBindingsOn)
 			[self.inputTextView becomeFirstResponder];
 		else
 			[self.inputTextView resignFirstResponder];
@@ -899,7 +888,7 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 		if ([self shouldIgnoreView:subview])
 			continue;
 		
-		CGRect rect = [subview.superview convertRect:subview.frame toView:frameView];
+		CGRect rect = [subview.superview convertRect:subview.frame toView:self.frameView];
 		
 		NSValue *rectValue = [NSValue valueWithCGRect:rect];
 		[self.frameView.rectsToOutline addObject:rectValue];

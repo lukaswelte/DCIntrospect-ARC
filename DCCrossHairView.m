@@ -7,7 +7,6 @@
 #import "DCCrossHairView.h"
 
 @implementation DCCrossHairView
-@synthesize color;
 
 - (id)initWithFrame:(CGRect)frame color:(UIColor *)aColor
 {

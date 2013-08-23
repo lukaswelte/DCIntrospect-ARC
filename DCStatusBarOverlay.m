@@ -7,7 +7,6 @@
 #import "DCStatusBarOverlay.h"
 
 @implementation DCStatusBarOverlay
-@synthesize leftLabel, rightLabel;
 
 - (void)dealloc
 {
