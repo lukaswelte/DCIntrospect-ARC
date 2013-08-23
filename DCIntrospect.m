@@ -64,9 +64,6 @@ static bool AmIBeingDebugged(void)
 
 @end
 
-
-DCIntrospect *sharedInstance = nil;
-
 @implementation DCIntrospect
 
 #pragma mark Setup
@@ -150,14 +147,15 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 
 + (DCIntrospect *)sharedIntrospector
 {
+	static DCIntrospect *sharedInstance = nil;
 #ifdef DEBUG
-	if (!sharedInstance)
-	{
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
 		sharedInstance = [[DCIntrospect alloc] init];
 		sharedInstance.keyboardBindingsOn = YES;
 		sharedInstance.showStatusBarOverlay = ![UIApplication sharedApplication].statusBarHidden;
 		[self workaroundUITextInputTraitsPropertiesBug];
-	}
+	});
 #endif
 	return sharedInstance;
 }
