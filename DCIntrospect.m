@@ -218,13 +218,13 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 																	 afterDelay:0.1];
 												  }];
 	
-  // dirty hack for UIWebView keyboard problems
-  [[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardWillShowNotification
-                                                    object:nil
-                                                     queue:nil
-                                                usingBlock:^(NSNotification *notification) {
-                                                  [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(takeFirstResponder) object:nil];
-                                                }];
+    // dirty hack for UIWebView keyboard problems
+	[[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardWillShowNotification
+													  object:nil
+													   queue:nil
+												  usingBlock:^(NSNotification *notification) {
+													  [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(takeFirstResponder) object:nil];
+												  }];
 
 	// listen for device orientation changes to adjust the status bar
 	[[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
