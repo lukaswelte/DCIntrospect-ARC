@@ -58,6 +58,8 @@ static bool AmIBeingDebugged(void)
 
 @interface DCIntrospect ()
 
+@property(nonatomic, assign, getter=isKeyboardVisible) BOOL keyboardVisible;
+
 - (void)takeFirstResponder;
 
 @end
@@ -205,19 +207,22 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 	}
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(statusBarTapped) name:kDCIntrospectNotificationStatusBarTapped object:nil];
+    
+	[[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardDidShowNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
+		self.keyboardVisible = YES;
+	}];
 	
 	// reclaim the keyboard after dismissal if it is taken
-	[[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardWillHideNotification
-													  object:nil
-													   queue:nil
-												  usingBlock:^(NSNotification *notification) {
-													  // needs to be done after a delay or else it doesn't work for some reason.
-													  if (self.keyboardBindingsOn)
-														  [self performSelector:@selector(takeFirstResponder)
-																	 withObject:nil
-																	 afterDelay:0.1];
-												  }];
-	
+	[[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardDidHideNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
+		self.keyboardVisible = NO;
+		
+		// needs to be done after a delay or else it doesn't work for some reason.
+		if (self.keyboardBindingsOn)
+			[self performSelector:@selector(takeFirstResponder)
+					   withObject:nil
+					   afterDelay:0.1];
+	}];
+    
     // dirty hack for UIWebView keyboard problems
 	[[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardWillShowNotification
 													  object:nil
@@ -225,6 +230,13 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 												  usingBlock:^(NSNotification *notification) {
 													  [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(takeFirstResponder) object:nil];
 												  }];
+    
+	[[NSNotificationCenter defaultCenter] addObserverForName:UIMenuControllerDidHideMenuNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
+		if (!self.keyboardVisible)
+		{
+			[self performSelector:@selector(takeFirstResponder) withObject:nil afterDelay:0.1];
+		}
+	}];
 
 	// listen for device orientation changes to adjust the status bar
 	[[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
