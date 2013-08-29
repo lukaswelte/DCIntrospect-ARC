@@ -7,11 +7,6 @@
 #import "DCFrameView.h"
 
 @implementation DCFrameView
-@synthesize delegate;
-@synthesize mainRect, superRect;
-@synthesize touchPointLabel;
-@synthesize rectsToOutline;
-@synthesize touchPointView;
 
 #pragma Setup
 
@@ -27,7 +22,7 @@
 		self.touchPointLabel = [[UILabel alloc] initWithFrame:CGRectZero];
 		self.touchPointLabel.text = @"X 320 Y 480";
 		self.touchPointLabel.font = [UIFont boldSystemFontOfSize:12.0f];
-		self.touchPointLabel.textAlignment = UITextAlignmentCenter;
+		self.touchPointLabel.textAlignment = NSTextAlignmentCenter;
 		self.touchPointLabel.textColor = [UIColor whiteColor];
 		self.touchPointLabel.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.65f];
 		self.touchPointLabel.layer.cornerRadius = 5.5f;
@@ -48,13 +43,13 @@
 
 - (void)setMainRect:(CGRect)newMainRect
 {
-	mainRect = newMainRect;
+	_mainRect = newMainRect;
 	[self setNeedsDisplay];
 }
 
 - (void)setSuperRect:(CGRect)newSuperRect
 {
-	superRect = newSuperRect;
+	_superRect = newSuperRect;
 	[self setNeedsDisplay];
 }
 
@@ -86,11 +81,11 @@
 	if (CGRectIsEmpty(self.mainRect))
 		return;
 
-	CGRect mainRectOffset = CGRectOffset(mainRect, -superRect.origin.x, -superRect.origin.y);
+	CGRect mainRectOffset = CGRectOffset(self.mainRect, -self.superRect.origin.x, -self.superRect.origin.y);
 	BOOL showAntialiasingWarning = NO;
 	if (! CGRectIsEmpty(self.superRect))
 	{
-		if ((mainRectOffset.origin.x != floorf(mainRectOffset.origin.x) && mainRect.origin.x != 0) || (mainRectOffset.origin.y != floor(mainRectOffset.origin.y) && mainRect.origin.y != 0))
+		if ((mainRectOffset.origin.x != floorf(mainRectOffset.origin.x) && self.mainRect.origin.x != 0) || (mainRectOffset.origin.y != floor(mainRectOffset.origin.y) && self.mainRect.origin.y != 0))
 		showAntialiasingWarning = YES;
 	}
 
@@ -122,7 +117,7 @@
 
 	NSString *leftDistanceString = (showAntialiasingWarning) ? [NSString stringWithFormat:@"%.1f", CGRectGetMinX(mainRectOffset)] : [NSString stringWithFormat:@"%.0f", CGRectGetMinX(mainRectOffset)];
 	CGSize leftDistanceStringSize = [leftDistanceString sizeWithFont:font];
-	[leftDistanceString drawInRect:CGRectMake(CGRectGetMinX(superRect) + 1.0f,
+	[leftDistanceString drawInRect:CGRectMake(CGRectGetMinX(self.superRect) + 1.0f,
 											  floorf(CGRectGetMidY(adjustedMainRect)) - leftDistanceStringSize.height,
 											  leftDistanceStringSize.width,
 											  leftDistanceStringSize.height)
@@ -186,7 +181,7 @@
 	NSString *touchPontLabelString = [NSString stringWithFormat:@"%.0f, %.0f", touchPoint.x, touchPoint.y];
 	self.touchPointLabel.text = touchPontLabelString;
 
-	CGSize stringSize = [touchPontLabelString sizeWithFont:touchPointLabel.font];
+	CGSize stringSize = [touchPontLabelString sizeWithFont:self.touchPointLabel.font];
 	CGRect frame = CGRectMake(touchPoint.x - floorf(stringSize.width / 2.0f) - 5.0f,
 							  touchPoint.y - stringSize.height - labelDistance,
 							  stringSize.width + 11.0f,

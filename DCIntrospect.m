@@ -58,25 +58,13 @@ static bool AmIBeingDebugged(void)
 
 @interface DCIntrospect ()
 
+@property(nonatomic, assign, getter=isKeyboardVisible) BOOL keyboardVisible;
+
 - (void)takeFirstResponder;
 
 @end
 
-
-DCIntrospect *sharedInstance = nil;
-
 @implementation DCIntrospect
-@synthesize keyboardBindingsOn, showStatusBarOverlay, invokeGestureRecognizer;
-@synthesize on;
-@synthesize handleArrowKeys;
-@synthesize viewOutlines, highlightNonOpaqueViews, flashOnRedraw;
-@synthesize statusBarOverlay;
-@synthesize inputTextView;
-@synthesize frameView;
-@synthesize objectNames;
-@synthesize currentView, originalFrame, originalAlpha;
-@synthesize currentViewHistory;
-@synthesize showingHelp;
 
 #pragma mark Setup
 
@@ -159,14 +147,15 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 
 + (DCIntrospect *)sharedIntrospector
 {
+	static DCIntrospect *sharedInstance = nil;
 #ifdef DEBUG
-	if (!sharedInstance)
-	{
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
 		sharedInstance = [[DCIntrospect alloc] init];
 		sharedInstance.keyboardBindingsOn = YES;
 		sharedInstance.showStatusBarOverlay = ![UIApplication sharedApplication].statusBarHidden;
 		[self workaroundUITextInputTraitsPropertiesBug];
-	}
+	});
 #endif
 	return sharedInstance;
 }
@@ -206,26 +195,36 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 	}
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(statusBarTapped) name:kDCIntrospectNotificationStatusBarTapped object:nil];
+    
+	[[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardDidShowNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
+		self.keyboardVisible = YES;
+	}];
 	
 	// reclaim the keyboard after dismissal if it is taken
-	[[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardWillHideNotification
+	[[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardDidHideNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
+		self.keyboardVisible = NO;
+		
+		// needs to be done after a delay or else it doesn't work for some reason.
+		if (self.keyboardBindingsOn)
+			[self performSelector:@selector(takeFirstResponder)
+					   withObject:nil
+					   afterDelay:0.1];
+	}];
+    
+    // dirty hack for UIWebView keyboard problems
+	[[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardWillShowNotification
 													  object:nil
 													   queue:nil
 												  usingBlock:^(NSNotification *notification) {
-													  // needs to be done after a delay or else it doesn't work for some reason.
-													  if (self.keyboardBindingsOn)
-														  [self performSelector:@selector(takeFirstResponder)
-																	 withObject:nil
-																	 afterDelay:0.1];
+													  [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(takeFirstResponder) object:nil];
 												  }];
-	
-  // dirty hack for UIWebView keyboard problems
-  [[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardWillShowNotification
-                                                    object:nil
-                                                     queue:nil
-                                                usingBlock:^(NSNotification *notification) {
-                                                  [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(takeFirstResponder) object:nil];
-                                                }];
+    
+	[[NSNotificationCenter defaultCenter] addObserverForName:UIMenuControllerDidHideMenuNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
+		if (!self.keyboardVisible)
+		{
+			[self performSelector:@selector(takeFirstResponder) withObject:nil afterDelay:0.1];
+		}
+	}];
 
 	// listen for device orientation changes to adjust the status bar
 	[[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
@@ -255,16 +254,16 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 - (void)setInvokeGestureRecognizer:(UIGestureRecognizer *)newGestureRecognizer
 {
 	UIWindow *mainWindow = [self mainWindow];
-	[mainWindow removeGestureRecognizer:invokeGestureRecognizer];
+	[mainWindow removeGestureRecognizer:self.invokeGestureRecognizer];
 	
-	invokeGestureRecognizer = nil;
-	[invokeGestureRecognizer addTarget:self action:@selector(invokeIntrospector)];
-	[mainWindow addGestureRecognizer:invokeGestureRecognizer];
+	self.invokeGestureRecognizer = nil;
+	[self.invokeGestureRecognizer addTarget:self action:@selector(invokeIntrospector)];
+	[mainWindow addGestureRecognizer:self.invokeGestureRecognizer];
 }
 
 - (void)setKeyboardBindingsOn:(BOOL)areKeyboardBindingsOn
 {
-	keyboardBindingsOn = areKeyboardBindingsOn;
+	_keyboardBindingsOn = areKeyboardBindingsOn;
 	if (self.keyboardBindingsOn)
 		[self.inputTextView becomeFirstResponder];
 	else
@@ -283,7 +282,7 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 		[self updateStatusBar];
 		[self updateFrameView];
 		
-		if (keyboardBindingsOn)
+		if (self.keyboardBindingsOn)
 			[self.inputTextView becomeFirstResponder];
 		else
 			[self.inputTextView resignFirstResponder];
@@ -889,7 +888,7 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 		if ([self shouldIgnoreView:subview])
 			continue;
 		
-		CGRect rect = [subview.superview convertRect:subview.frame toView:frameView];
+		CGRect rect = [subview.superview convertRect:subview.frame toView:self.frameView];
 		
 		NSValue *rectValue = [NSValue valueWithCGRect:rect];
 		[self.frameView.rectsToOutline addObject:rectValue];
