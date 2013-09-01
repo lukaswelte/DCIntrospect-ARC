@@ -1592,21 +1592,20 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 - (NSMutableArray *)viewsAtPoint:(CGPoint)touchPoint inView:(UIView *)view
 {
 	NSMutableArray *views = [[NSMutableArray alloc] init];
-	for (UIView *subview in view.subviews)
+	
+	if ([view pointInside:touchPoint withEvent:nil])
 	{
-		CGRect rect = subview.frame;
-		if ([self shouldIgnoreView:subview])
-			continue;
-		
-		if (CGRectContainsPoint(rect, touchPoint))
-		{
-			[views addObject:subview];
-			
-			// convert the point to it's superview
-			CGPoint newTouchPoint = touchPoint;
-			newTouchPoint = [view convertPoint:newTouchPoint toView:subview];
-			[views addObjectsFromArray:[self viewsAtPoint:newTouchPoint inView:subview]];
-		}
+	   [views addObject:view];
+	   
+	   for (UIView *subview in view.subviews)
+	   {
+	       if ([self shouldIgnoreView:subview])
+	           continue;
+	       
+	       CGPoint convertedTouchPoint = [view convertPoint:touchPoint toView:subview];
+	       
+	       [views addObjectsFromArray:[self viewsAtPoint:convertedTouchPoint inView:subview]];
+	   }
 	}
 	
 	return views;
