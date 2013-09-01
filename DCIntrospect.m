@@ -176,13 +176,12 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 	
 	if (!self.inputTextView)
 	{
-        self.inputTextView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+        self.inputTextView = [[UITextView alloc] initWithFrame:CGRectMake(0, -100, 100, 100)];
 		self.inputTextView.delegate = self;
 		self.inputTextView.autocorrectionType = UITextAutocorrectionTypeNo;
 		self.inputTextView.autocapitalizationType = UITextAutocapitalizationTypeNone;
 		self.inputTextView.inputView = [[UIView alloc] init];
 		self.inputTextView.scrollsToTop = NO;
-        self.inputTextView.hidden = YES;
 		[mainWindow addSubview:self.inputTextView];
 	}
 	
