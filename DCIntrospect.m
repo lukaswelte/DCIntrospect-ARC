@@ -52,6 +52,8 @@ static bool AmIBeingDebugged(void)
 #if TARGET_CPU_ARM
 #define DEBUGSTOP(signal) __asm__ __volatile__ ("mov r0, %0\nmov r1, %1\nmov r12, %2\nswi 128\n" : : "r"(getpid ()), "r"(signal), "r"(37) : "r12", "r0", "r1", "cc");
 #define DEBUGGER do { int trapSignal = AmIBeingDebugged () ? SIGINT : SIGSTOP; DEBUGSTOP(trapSignal); if (trapSignal == SIGSTOP) { DEBUGSTOP (SIGINT); } } while (false);
+#elif TARGET_CPU_ARM64
+#define DEBUGGER // Breaking into debugger on arm64 is not currently supported
 #else
 #define DEBUGGER do { int trapSignal = AmIBeingDebugged () ? SIGINT : SIGSTOP; __asm__ __volatile__ ("pushl %0\npushl %1\npush $0\nmovl %2, %%eax\nint $0x80\nadd $12, %%esp" : : "g" (trapSignal), "g" (getpid ()), "n" (37) : "eax", "cc"); } while (false);
 #endif
@@ -529,7 +531,7 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 			if (self.currentViewHistory.count == 0)
 				return NO;
 			
-			int indexOfCurrentView = [self.currentViewHistory indexOfObject:self.currentView];
+			NSUInteger indexOfCurrentView = [self.currentViewHistory indexOfObject:self.currentView];
 			if (indexOfCurrentView == 0)
 			{
 				NSLog(@"DCIntrospect: At bottom of view history.");
@@ -770,7 +772,7 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 			nameForObject = [nameForObject substringFromIndex:@"self.".length];
 		
 		if (self.currentView.tag != 0)
-			self.statusBarOverlay.leftLabel.text = [NSString stringWithFormat:@"%@ (tag: %i)", nameForObject, self.currentView.tag];
+			self.statusBarOverlay.leftLabel.text = [NSString stringWithFormat:@"%@ (tag: %ld)", nameForObject, (long)self.currentView.tag];
 		else
 			self.statusBarOverlay.leftLabel.text = [NSString stringWithFormat:@"%@", nameForObject];
 		
@@ -1434,7 +1436,7 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 		UIView *view = (UIView *)object;
 		// print out generic uiview properties
 		[outputString appendString:@"  ** UIView properties **\n"];
-		[outputString appendFormat:@"    tag: %i\n", view.tag];
+		[outputString appendFormat:@"    tag: %ld\n", (long)view.tag];
 		[outputString appendFormat:@"    frame: %@ | ", NSStringFromCGRect(view.frame)];
 		[outputString appendFormat:@"bounds: %@ | ", NSStringFromCGRect(view.bounds)];
 		[outputString appendFormat:@"center: %@\n", NSStringFromCGPoint(view.center)];
