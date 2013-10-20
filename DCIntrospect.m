@@ -256,8 +256,7 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 {
 	UIWindow *mainWindow = [self mainWindow];
 	[mainWindow removeGestureRecognizer:self.invokeGestureRecognizer];
-	
-	self.invokeGestureRecognizer = nil;
+	_invokeGestureRecognizer = newGestureRecognizer;
 	[self.invokeGestureRecognizer addTarget:self action:@selector(invokeIntrospector)];
 	[mainWindow addGestureRecognizer:self.invokeGestureRecognizer];
 }
