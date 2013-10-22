@@ -5,6 +5,7 @@
 #define kDCIntrospectFlashOnRedrawColor [UIColor colorWithRed:1.0f green:0.0f blue:0.0f alpha:0.4f]			// UIColor
 #define kDCIntrospectFlashOnRedrawFlashLength 0.03f													// NSTimeInterval
 #define kDCIntrospectOpaqueColor [UIColor redColor]													// UIColor
+#define kDCIntrospectAmbiguousColor [UIColor yellowColor]											// UIColor
 #define kDCIntrospectTemporaryDisableDuration 10.                           // Seconds
 
 //////////////////
@@ -22,6 +23,8 @@
 #define kDCIntrospectKeysToggleFlashViewRedraws			@"f"		// toggle flashing on redraw for all views that implement [[DCIntrospect sharedIntrospector] flashRect:inView:] in drawRect:
 #define kDCIntrospectKeysToggleShowCoordinates			@"c"		// toggles the coordinates display
 #define kDCIntrospectKeysEnterBlockMode					@"b"		// enters block action mode
+#define kDCIntrospectKeysToggleAmbiguousLayouts			@"A"		// colors all views that have ambiguous layouts to yellow
+
 
 // When introspector is invoked and a view is selected //
 #define kDCIntrospectKeysNudgeViewLeft					@"4"		// nudges the selected view in given direction

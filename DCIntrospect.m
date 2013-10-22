@@ -5,6 +5,7 @@
 //
 
 #import "DCIntrospect.h"
+#import "UIView+DCAdditions.h"
 #import <dlfcn.h>
 
 #include <assert.h>
@@ -451,6 +452,11 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 	else if ([string isEqualToString:kDCIntrospectKeysToggleNonOpaqueViews])
 	{
 		[self toggleNonOpaqueViews];
+		return NO;
+	}
+	else if ([string isEqualToString:kDCIntrospectKeysToggleAmbiguousLayouts])
+	{
+		[self toggleAmbiguousLayouts];
 		return NO;
 	}
 	else if ([string isEqualToString:kDCIntrospectKeysToggleFlashViewRedraws])
@@ -939,6 +945,42 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 	}
 }
 
+- (void)toggleAmbiguousLayouts
+{
+	self.highlightAmbiguousLayouts = !self.highlightAmbiguousLayouts;
+	
+	UIWindow *mainWindow = [self mainWindow];
+	[self toggleAmbiguousLayoutsOfSubiew:mainWindow];
+	
+	NSString *string = [NSString stringWithFormat:@"Highlighting ambiguous layouts is %@", (self.highlightAmbiguousLayouts) ? @"on" : @"off"];
+	if (self.showStatusBarOverlay)
+		[self showTemporaryStringInStatusBar:string];
+	else
+		NSLog(@"DCIntrospect: %@", string);
+}
+
+- (void)toggleAmbiguousLayoutsOfSubiew:(UIView *)view
+{
+	for (UIView *subview in view.subviews)
+	{
+		if ([self shouldIgnoreView:subview])
+			continue;
+		
+		if ([subview respondsToSelector:@selector(hasAmbiguousLayout)])
+		{
+			UIColor *originalColor = subview.dc_originalBackgroundColor;
+			
+			BOOL hasAmbiguousLayout = [subview hasAmbiguousLayout];
+			UIColor *toggledBackgroundColor = self.highlightAmbiguousLayouts ? [kDCIntrospectAmbiguousColor colorWithAlphaComponent:.6] : originalColor;
+						
+			if (hasAmbiguousLayout)
+				subview.backgroundColor = toggledBackgroundColor;
+		}
+		
+		[self toggleAmbiguousLayoutsOfSubiew:subview];
+	}
+}
+
 - (void)toggleRedrawFlashing
 {
 	self.flashOnRedraw = !self.flashOnRedraw;
@@ -1364,6 +1406,8 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 		[helpString appendFormat:@"<div><span class='name'>Invoke Introspector</span><div class='key'>%@</div></div>", ([kDCIntrospectKeysInvoke isEqualToString:@" "]) ? @"spacebar" : kDCIntrospectKeysInvoke];
 		[helpString appendFormat:@"<div><span class='name'>Toggle View Outlines</span><div class='key'>%@</div></div>", kDCIntrospectKeysToggleViewOutlines];
 		[helpString appendFormat:@"<div><span class='name'>Toggle Highlighting Non-Opaque Views</span><div class='key'>%@</div></div>", kDCIntrospectKeysToggleNonOpaqueViews];
+		[helpString appendFormat:@"<div><span class='name'>Toggle Highlighting Ambiguous Layouts</span><div class='key'>%@</div></div>", kDCIntrospectKeysToggleAmbiguousLayouts];
+
 		[helpString appendFormat:@"<div><span class='name'>Toggle Help</span><div class='key'>%@</div></div>", kDCIntrospectKeysToggleHelp];
 		[helpString appendFormat:@"<div><span class='name'>Toggle flash on <span class='code'>drawRect:</span> (see below)</span><div class='key'>%@</div></div>", kDCIntrospectKeysToggleFlashViewRedraws];
 		[helpString appendFormat:@"<div><span class='name'>Toggle coordinates</span><div class='key'>%@</div></div>", kDCIntrospectKeysToggleShowCoordinates];
