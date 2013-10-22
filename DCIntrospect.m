@@ -796,6 +796,10 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 			self.statusBarOverlay.leftLabel.text = [NSString stringWithFormat:@"%@", nameForObject];
 		
 		self.statusBarOverlay.rightLabel.text = NSStringFromCGRect(self.currentView.frame);
+
+		if ([self.currentView respondsToSelector:@selector(hasAmbiguousLayout)])
+			if ([self.currentView hasAmbiguousLayout])
+				self.statusBarOverlay.rightLabel.text = [NSString stringWithFormat:@"\ue021%@", self.statusBarOverlay.rightLabel.text];
 	}
 	else
 	{
