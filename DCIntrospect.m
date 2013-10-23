@@ -5,6 +5,7 @@
 //
 
 #import "DCIntrospect.h"
+#import "UIView+DCAdditions.h"
 #import <dlfcn.h>
 
 #include <assert.h>
@@ -453,6 +454,11 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 		[self toggleNonOpaqueViews];
 		return NO;
 	}
+	else if ([string isEqualToString:kDCIntrospectKeysToggleAmbiguousLayouts])
+	{
+		[self toggleAmbiguousLayouts];
+		return NO;
+	}
 	else if ([string isEqualToString:kDCIntrospectKeysToggleFlashViewRedraws])
 	{
 		[self toggleRedrawFlashing];
@@ -495,6 +501,20 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 		else if ([string isEqualToString:kDCIntrospectKeysLogViewRecursive])
 		{
 			[self logRecursiveDescriptionForView:self.currentView];
+			return NO;
+		}
+		else if ([string isEqualToString:kDCIntrospectKeysExerciseAmbiguityInLayout])
+		{
+			[self exerciseAmbiguityInLayoutForView:self.currentView];
+			return NO;
+		}
+		else if ([string isEqualToString:kDCIntrospectKeysConstraintsAffectingLayoutForAxisX])
+		{
+			[self logHorizontalConstraintsForView:self.currentView];
+			return NO;
+		}
+		else if ([string isEqualToString:kDCIntrospectKeysConstraintsAffectingLayoutForAxisY]) {
+			[self logVerticalConstraintsForView:self.currentView];
 			return NO;
 		}
 		else if ([string isEqualToString:kDCIntrospectKeysSetNeedsDisplay])
@@ -776,6 +796,10 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 			self.statusBarOverlay.leftLabel.text = [NSString stringWithFormat:@"%@", nameForObject];
 		
 		self.statusBarOverlay.rightLabel.text = NSStringFromCGRect(self.currentView.frame);
+
+		if ([self.currentView respondsToSelector:@selector(hasAmbiguousLayout)])
+			if ([self.currentView hasAmbiguousLayout])
+				self.statusBarOverlay.rightLabel.text = [NSString stringWithFormat:@"\ue021%@", self.statusBarOverlay.rightLabel.text];
 	}
 	else
 	{
@@ -925,6 +949,42 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 	}
 }
 
+- (void)toggleAmbiguousLayouts
+{
+	self.highlightAmbiguousLayouts = !self.highlightAmbiguousLayouts;
+	
+	UIWindow *mainWindow = [self mainWindow];
+	[self toggleAmbiguousLayoutsOfSubiew:mainWindow];
+	
+	NSString *string = [NSString stringWithFormat:@"Highlighting ambiguous layouts is %@", (self.highlightAmbiguousLayouts) ? @"on" : @"off"];
+	if (self.showStatusBarOverlay)
+		[self showTemporaryStringInStatusBar:string];
+	else
+		NSLog(@"DCIntrospect: %@", string);
+}
+
+- (void)toggleAmbiguousLayoutsOfSubiew:(UIView *)view
+{
+	for (UIView *subview in view.subviews)
+	{
+		if ([self shouldIgnoreView:subview])
+			continue;
+		
+		if ([subview respondsToSelector:@selector(hasAmbiguousLayout)])
+		{
+			UIColor *originalColor = subview.dc_originalBackgroundColor;
+			
+			BOOL hasAmbiguousLayout = [subview hasAmbiguousLayout];
+			UIColor *toggledBackgroundColor = self.highlightAmbiguousLayouts ? [kDCIntrospectAmbiguousColor colorWithAlphaComponent:.6] : originalColor;
+						
+			if (hasAmbiguousLayout)
+				subview.backgroundColor = toggledBackgroundColor;
+		}
+		
+		[self toggleAmbiguousLayoutsOfSubiew:subview];
+	}
+}
+
 - (void)toggleRedrawFlashing
 {
 	self.flashOnRedraw = !self.flashOnRedraw;
@@ -960,6 +1020,31 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 		[view.layer addSublayer:layer];
 		[layer performSelector:@selector(removeFromSuperlayer) withObject:nil afterDelay:kDCIntrospectFlashOnRedrawFlashLength];
 	}
+}
+
+- (void)exerciseAmbiguityInLayoutForView:(UIView *)view
+{
+	if ([view respondsToSelector:@selector(hasAmbiguousLayout)])
+	{
+		BOOL hasAmbiguousLayout = [view hasAmbiguousLayout];
+		NSLog(@"DCIntrospect: ambiguous layout? %@", hasAmbiguousLayout ? @"YES" : @"NO");
+		if (hasAmbiguousLayout)
+			[view exerciseAmbiguityInLayout];
+	}
+}
+
+- (void)logHorizontalConstraintsForView:(UIView *)view
+{
+	if ([view respondsToSelector:@selector(constraintsAffectingLayoutForAxis:)])
+		NSLog(@"DCIntrospect: constraints for horizontal axis: %@",
+			  [view constraintsAffectingLayoutForAxis:UILayoutConstraintAxisHorizontal]);
+}
+
+- (void)logVerticalConstraintsForView:(UIView *)view
+{
+	if ([view respondsToSelector:@selector(constraintsAffectingLayoutForAxis:)])
+		NSLog(@"DCIntrospect: constraints for vertical axis: %@",
+			  [view constraintsAffectingLayoutForAxis:UILayoutConstraintAxisVertical]);
 }
 
 #pragma mark Description Methods
@@ -1325,6 +1410,8 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 		[helpString appendFormat:@"<div><span class='name'>Invoke Introspector</span><div class='key'>%@</div></div>", ([kDCIntrospectKeysInvoke isEqualToString:@" "]) ? @"spacebar" : kDCIntrospectKeysInvoke];
 		[helpString appendFormat:@"<div><span class='name'>Toggle View Outlines</span><div class='key'>%@</div></div>", kDCIntrospectKeysToggleViewOutlines];
 		[helpString appendFormat:@"<div><span class='name'>Toggle Highlighting Non-Opaque Views</span><div class='key'>%@</div></div>", kDCIntrospectKeysToggleNonOpaqueViews];
+		[helpString appendFormat:@"<div><span class='name'>Toggle Highlighting Ambiguous Layouts</span><div class='key'>%@</div></div>", kDCIntrospectKeysToggleAmbiguousLayouts];
+
 		[helpString appendFormat:@"<div><span class='name'>Toggle Help</span><div class='key'>%@</div></div>", kDCIntrospectKeysToggleHelp];
 		[helpString appendFormat:@"<div><span class='name'>Toggle flash on <span class='code'>drawRect:</span> (see below)</span><div class='key'>%@</div></div>", kDCIntrospectKeysToggleFlashViewRedraws];
 		[helpString appendFormat:@"<div><span class='name'>Toggle coordinates</span><div class='key'>%@</div></div>", kDCIntrospectKeysToggleShowCoordinates];
@@ -1334,6 +1421,9 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 		[helpString appendFormat:@"<div><span class='name'>Log Properties</span><div class='key'>%@</div></div>", kDCIntrospectKeysLogProperties];
 		[helpString appendFormat:@"<div><span class='name'>Log Accessibility Properties</span><div class='key'>%@</div></div>", kDCIntrospectKeysLogAccessibilityProperties];
 		[helpString appendFormat:@"<div><span class='name'>Log Recursive Description for View</span><div class='key'>%@</div></div>", kDCIntrospectKeysLogViewRecursive];
+		[helpString appendFormat:@"<div><span class='name'>Exercise autolayout ambiguity, if any</span><div class='key'>%@</div></div>", kDCIntrospectKeysExerciseAmbiguityInLayout];
+		[helpString appendFormat:@"<div><span class='name'>Log horizontal constraints affecting View</span><div class='key'>%@</div></div>", kDCIntrospectKeysConstraintsAffectingLayoutForAxisX];
+		[helpString appendFormat:@"<div><span class='name'>Log vertical constraints affecting View</span><div class='key'>%@</div></div>", kDCIntrospectKeysConstraintsAffectingLayoutForAxisY];
 		[helpString appendFormat:@"<div><span class='name'>Enter GDB</span><div class='key'>%@</div></div>", kDCIntrospectKeysEnterGDB];
 		[helpString appendFormat:@"<div><span class='name'>Move up in view hierarchy</span><div class='key'>%@</div></div>", ([kDCIntrospectKeysMoveUpInViewHierarchy isEqualToString:@""]) ? @"page up" : kDCIntrospectKeysMoveUpInViewHierarchy];
 		[helpString appendFormat:@"<div><span class='name'>Move back down in view hierarchy</span><div class='key'>%@</div></div>", ([kDCIntrospectKeysMoveBackInViewHierarchy isEqualToString:@""]) ? @"page down" : kDCIntrospectKeysMoveBackInViewHierarchy];

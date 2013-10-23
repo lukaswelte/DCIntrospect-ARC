@@ -5,6 +5,7 @@
 #define kDCIntrospectFlashOnRedrawColor [UIColor colorWithRed:1.0f green:0.0f blue:0.0f alpha:0.4f]			// UIColor
 #define kDCIntrospectFlashOnRedrawFlashLength 0.03f													// NSTimeInterval
 #define kDCIntrospectOpaqueColor [UIColor redColor]													// UIColor
+#define kDCIntrospectAmbiguousColor [UIColor yellowColor]											// UIColor
 #define kDCIntrospectTemporaryDisableDuration 10.                           // Seconds
 
 //////////////////
@@ -22,6 +23,8 @@
 #define kDCIntrospectKeysToggleFlashViewRedraws			@"f"		// toggle flashing on redraw for all views that implement [[DCIntrospect sharedIntrospector] flashRect:inView:] in drawRect:
 #define kDCIntrospectKeysToggleShowCoordinates			@"c"		// toggles the coordinates display
 #define kDCIntrospectKeysEnterBlockMode					@"b"		// enters block action mode
+#define kDCIntrospectKeysToggleAmbiguousLayouts			@"A"		// colors all views that have ambiguous layouts to yellow
+
 
 // When introspector is invoked and a view is selected //
 #define kDCIntrospectKeysNudgeViewLeft					@"4"		// nudges the selected view in given direction
@@ -44,6 +47,9 @@
 #define kDCIntrospectKeysLogProperties					@"p"		// logs all properties of the selected view
 #define kDCIntrospectKeysLogAccessibilityProperties		@"a"		// logs accessibility info (useful for automated view tests - thanks to @samsoffes for the idea)
 #define kDCIntrospectKeysLogViewRecursive				@"v"		// calls private method recursiveDescription which logs selected view heirachy
+#define kDCIntrospectKeysExerciseAmbiguityInLayout      @"m"    // logs the value of hasAmbiguousLayout and calls exerciseAmbiguityInLayout
+#define kDCIntrospectKeysConstraintsAffectingLayoutForAxisX    @"x"    // logs the value of constraintsAffectingLayoutForAxis:horizontal
+#define kDCIntrospectKeysConstraintsAffectingLayoutForAxisY   @"X"    // logs the value of constraintsAffectingLayoutForAxis:vertical
 
 #define kDCIntrospectKeysMoveUpInViewHierarchy			@"y"		// changes the selected view to it's superview
 #define kDCIntrospectKeysMoveBackInViewHierarchy		@"t"		// changes the selected view back to the previous view selected (after using the above command)

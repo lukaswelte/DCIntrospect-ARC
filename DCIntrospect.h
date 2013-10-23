@@ -37,6 +37,7 @@
 @property (nonatomic) BOOL handleArrowKeys;
 @property (nonatomic) BOOL viewOutlines;
 @property (nonatomic) BOOL highlightNonOpaqueViews;
+@property (nonatomic) BOOL highlightAmbiguousLayouts;
 @property (nonatomic) BOOL flashOnRedraw;
 @property (nonatomic, retain) DCFrameView *frameView;
 @property (nonatomic, retain) UITextView *inputTextView;
@@ -118,6 +119,11 @@
 - (void)toggleRedrawFlashing;
 - (void)callDrawRectOnViewsInSubview:(UIView *)subview;
 - (void)flashRect:(CGRect)rect inView:(UIView *)view;
+- (void)exerciseAmbiguityInLayoutForView:(UIView *)view;;
+- (void)logHorizontalConstraintsForView:(UIView *)view;;
+- (void)logVerticalConstraintsForView:(UIView *)view;;
+- (void)toggleAmbiguousLayouts;
+- (void)toggleAmbiguousLayoutsOfSubiew:(UIView *)view;
 
 /////////////////////////////
 // (Somewhat) Experimental //
