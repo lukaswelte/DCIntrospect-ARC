@@ -49,6 +49,23 @@
              [UIKeyCommand keyCommandWithInput:kDCIntrospectKeysMoveToPrevSiblingView modifierFlags:0 action:@selector(moveToPrevSiblingView)],
              [UIKeyCommand keyCommandWithInput:kDCIntrospectKeysEnterGDB modifierFlags:0 action:@selector(enterGDB)],
              [UIKeyCommand keyCommandWithInput:kDCIntrospectKeysDisableForPeriod modifierFlags:0 action:@selector(disableForPeriod)],
+             
+             [UIKeyCommand keyCommandWithInput:UIKeyInputUpArrow modifierFlags:0 action:@selector(keyUp)],
+             [UIKeyCommand keyCommandWithInput:UIKeyInputUpArrow modifierFlags:UIKeyModifierShift action:@selector(keyUpShift)],
+             [UIKeyCommand keyCommandWithInput:UIKeyInputUpArrow modifierFlags:UIKeyModifierAlternate action:@selector(keyUpAlternate)],
+             
+             [UIKeyCommand keyCommandWithInput:UIKeyInputDownArrow modifierFlags:0 action:@selector(keyDown)],
+             [UIKeyCommand keyCommandWithInput:UIKeyInputDownArrow modifierFlags:UIKeyModifierShift action:@selector(keyDownShift)],
+             [UIKeyCommand keyCommandWithInput:UIKeyInputDownArrow modifierFlags:UIKeyModifierAlternate action:@selector(keyDownAlternate)],
+
+             [UIKeyCommand keyCommandWithInput:UIKeyInputLeftArrow modifierFlags:0 action:@selector(keyLeft)],
+             [UIKeyCommand keyCommandWithInput:UIKeyInputLeftArrow modifierFlags:UIKeyModifierShift action:@selector(keyLeftShift)],
+             [UIKeyCommand keyCommandWithInput:UIKeyInputLeftArrow modifierFlags:UIKeyModifierAlternate action:@selector(keyLeftAlternate)],
+             
+             [UIKeyCommand keyCommandWithInput:UIKeyInputRightArrow modifierFlags:0 action:@selector(keyRight)],
+             [UIKeyCommand keyCommandWithInput:UIKeyInputRightArrow modifierFlags:UIKeyModifierShift action:@selector(keyRightShift)],
+             [UIKeyCommand keyCommandWithInput:UIKeyInputRightArrow modifierFlags:UIKeyModifierAlternate action:@selector(keyRightAlternate)],
+             
              ];
 }
 
@@ -190,6 +207,54 @@
 
 - (void) disableForPeriod {
     [self.keyboardInputDelegate disableForPeriod];
+}
+
+- (void) keyLeft {
+    [self.keyboardInputDelegate handleKey:KeyDirectionLeft modifier:KeyModifierNone];
+}
+
+- (void) keyLeftShift {
+    [self.keyboardInputDelegate handleKey:KeyDirectionLeft modifier:KeyModifierShift];
+}
+
+- (void) keyLeftAlternate {
+    [self.keyboardInputDelegate handleKey:KeyDirectionLeft modifier:KeyModifierAlternate];
+}
+
+- (void) keyRight {
+    [self.keyboardInputDelegate handleKey:KeyDirectionRight modifier:KeyModifierNone];
+}
+
+- (void) keyRightShift {
+    [self.keyboardInputDelegate handleKey:KeyDirectionRight modifier:KeyModifierShift];
+}
+
+- (void) keyRightAlternate {
+    [self.keyboardInputDelegate handleKey:KeyDirectionRight modifier:KeyModifierAlternate];
+}
+
+- (void) keyUp {
+    [self.keyboardInputDelegate handleKey:KeyDirectionUp modifier:KeyModifierNone];
+}
+
+- (void) keyUpShift {
+    [self.keyboardInputDelegate handleKey:KeyDirectionUp modifier:KeyModifierShift];
+}
+
+- (void) keyUpAlternate {
+    [self.keyboardInputDelegate handleKey:KeyDirectionUp modifier:KeyModifierAlternate];
+}
+
+- (void) keyDown {
+    [self.keyboardInputDelegate handleKey:KeyDirectionDown modifier:KeyModifierNone];
+}
+
+- (void) keyDownShift {
+    [self.keyboardInputDelegate handleKey:KeyDirectionDown modifier:KeyModifierShift];
+}
+
+- (void) keyDownAlternate {
+    [self.keyboardInputDelegate handleKey:KeyDirectionDown modifier:KeyModifierAlternate];
 }
 
 #endif

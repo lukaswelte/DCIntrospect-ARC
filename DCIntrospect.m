@@ -380,50 +380,40 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 	BOOL shiftKey = selectionLength != 0;
 	BOOL optionKey = selectionLocation % 2 == 1;
 	
-	CGRect frame = self.currentView.frame;
 	if (shiftKey)
 	{
 		if (selectionLocation == 4 && selectionLength == 1)
-			frame.origin.x -= 10.0f;
+            [self handleKey:KeyDirectionLeft modifier:KeyModifierShift];
 		else if (selectionLocation == 5 && selectionLength == 1)
-			frame.origin.x += 10.0f;
+            [self handleKey:KeyDirectionRight modifier:KeyModifierShift];
 		else if (selectionLocation == 0 && selectionLength == 5)
-			frame.origin.y -= 10.0f;
+			[self handleKey:KeyDirectionUp modifier:KeyModifierShift];
 		else if (selectionLocation == 5 && selectionLength == 5)
-			frame.origin.y += 10.0f;
+			[self handleKey:KeyDirectionDown modifier:KeyModifierShift];
 	}
 	else if (optionKey)
 	{
 		if (selectionLocation == 7)
-			frame.size.width += 1.0f;
+			[self handleKey:KeyDirectionRight modifier:KeyModifierAlternate];
 		else if (selectionLocation == 3)
-			frame.size.width -= 1.0f;
+			[self handleKey:KeyDirectionLeft modifier:KeyModifierAlternate];
 		else if (selectionLocation == 9)
-			frame.size.height += 1.0f;
+			[self handleKey:KeyDirectionDown modifier:KeyModifierAlternate];
 		else if (selectionLocation == 1)
-			frame.size.height -= 1.0f;
+			[self handleKey:KeyDirectionUp modifier:KeyModifierAlternate];
 	}
 	else
 	{
 		if (selectionLocation == 4)
-			frame.origin.x -= 1.0f;
+			[self handleKey:KeyDirectionLeft modifier:KeyModifierNone];
 		else if (selectionLocation == 6)
-			frame.origin.x += 1.0f;
+			[self handleKey:KeyDirectionRight modifier:KeyModifierNone];
 		else if (selectionLocation == 0)
-			frame.origin.y -= 1.0f;
+			[self handleKey:KeyDirectionUp modifier:KeyModifierNone];
 		else if (selectionLocation == 10)
-			frame.origin.y += 1.0f;
+			[self handleKey:KeyDirectionDown modifier:KeyModifierNone];
 	}
 	
-	self.currentView.frame = CGRectMake(floorf(frame.origin.x),
-										floorf(frame.origin.y),
-										floorf(frame.size.width),
-										floorf(frame.size.height));
-	
-	[self updateFrameView];
-	[self updateStatusBar];
-	
-    self.handleArrowKeys = NO; //option-down arrow will get handled twice if key handling isn't disabled immediately
     [self performSelector:@selector(resetInputTextView) withObject:nil afterDelay:0.0]; //selectedRange doesn't reset correctly on iOS 6 if this isn't performed with a delay
 }
 
@@ -1171,6 +1161,77 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
     
     [self updateFrameView];
     [self updateStatusBar];
+}
+
+- (void)handleKey:(KeyDirection)keyDirection modifier:(KeyModifier)modifier {
+    CGRect frame = self.currentView.frame;
+	if (modifier == KeyModifierShift)
+	{
+        switch (keyDirection) {
+            case KeyDirectionLeft:
+                frame.origin.x -= 10.0f;
+                break;
+            case KeyDirectionRight:
+                frame.origin.x += 10.0f;
+                break;
+            case KeyDirectionDown:
+                frame.origin.y += 10.0f;
+                break;
+            case KeyDirectionUp:
+                frame.origin.y -= 10.0f;
+                break;
+            default:
+                break;
+        }
+	}
+	else if (modifier == KeyModifierAlternate)
+	{
+        switch (keyDirection) {
+            case KeyDirectionLeft:
+                frame.size.width -= 1.0f;
+                break;
+            case KeyDirectionRight:
+                frame.size.width += 1.0f;
+                break;
+            case KeyDirectionDown:
+                frame.size.height += 1.0f;
+                break;
+            case KeyDirectionUp:
+                frame.size.height -= 1.0f;
+                break;
+            default:
+                break;
+        }
+	}
+	else
+	{
+        switch (keyDirection) {
+            case KeyDirectionLeft:
+                frame.origin.x -= 1.0f;
+                break;
+            case KeyDirectionRight:
+                frame.origin.x += 1.0f;
+                break;
+            case KeyDirectionDown:
+                frame.origin.y += 1.0f;
+                break;
+            case KeyDirectionUp:
+                frame.origin.y -= 1.0f;
+                break;
+            default:
+                break;
+        }
+	}
+	
+	self.currentView.frame = CGRectMake(floorf(frame.origin.x),
+										floorf(frame.origin.y),
+										floorf(frame.size.width),
+										floorf(frame.size.height));
+	
+	[self updateFrameView];
+	[self updateStatusBar];
+	
+    self.handleArrowKeys = NO; //option-down arrow will get handled twice if key handling isn't disabled immediately
 }
 
 #pragma mark Description Methods

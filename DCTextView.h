@@ -22,6 +22,19 @@ typedef NS_ENUM(NSUInteger, FrameManipulation) {
     FrameManipulationDecreaseAlpha,
 };
 
+typedef NS_ENUM(NSUInteger, KeyDirection) {
+    KeyDirectionLeft,
+    KeyDirectionRight,
+    KeyDirectionUp,
+    KeyDirectionDown,
+};
+
+typedef NS_ENUM(NSUInteger, KeyModifier) {
+    KeyModifierNone,
+    KeyModifierShift,
+    KeyModifierAlternate,
+};
+
 
 @protocol DCTextViewDelegate <UITextViewDelegate>
 
@@ -50,6 +63,7 @@ typedef NS_ENUM(NSUInteger, FrameManipulation) {
 - (void) logCodeForCurrentViewChanges;
 - (void) manipulateFrame: (FrameManipulation) manipulation;
 - (void) enterGDB;
+- (void) handleKey:(KeyDirection) keyDirection modifier: (KeyModifier) modifier;
 
 @end
 
