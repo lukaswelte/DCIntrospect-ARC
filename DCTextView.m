@@ -50,24 +50,26 @@
              [UIKeyCommand keyCommandWithInput:kDCIntrospectKeysEnterGDB modifierFlags:0 action:@selector(enterGDB)],
              [UIKeyCommand keyCommandWithInput:kDCIntrospectKeysDisableForPeriod modifierFlags:0 action:@selector(disableForPeriod)],
              
-             [UIKeyCommand keyCommandWithInput:UIKeyInputUpArrow modifierFlags:0 action:@selector(keyUp)],
-             [UIKeyCommand keyCommandWithInput:UIKeyInputUpArrow modifierFlags:UIKeyModifierShift action:@selector(keyUpShift)],
-             [UIKeyCommand keyCommandWithInput:UIKeyInputUpArrow modifierFlags:UIKeyModifierAlternate action:@selector(keyUpAlternate)],
+             [UIKeyCommand keyCommandWithInput:UIKeyInputUpArrow modifierFlags:0 action:@selector(keyUp:)],
+             [UIKeyCommand keyCommandWithInput:UIKeyInputUpArrow modifierFlags:UIKeyModifierShift action:@selector(keyUp:)],
+             [UIKeyCommand keyCommandWithInput:UIKeyInputUpArrow modifierFlags:UIKeyModifierAlternate action:@selector(keyUp:)],
              
-             [UIKeyCommand keyCommandWithInput:UIKeyInputDownArrow modifierFlags:0 action:@selector(keyDown)],
-             [UIKeyCommand keyCommandWithInput:UIKeyInputDownArrow modifierFlags:UIKeyModifierShift action:@selector(keyDownShift)],
-             [UIKeyCommand keyCommandWithInput:UIKeyInputDownArrow modifierFlags:UIKeyModifierAlternate action:@selector(keyDownAlternate)],
+             [UIKeyCommand keyCommandWithInput:UIKeyInputDownArrow modifierFlags:0 action:@selector(keyDown:)],
+             [UIKeyCommand keyCommandWithInput:UIKeyInputDownArrow modifierFlags:UIKeyModifierShift action:@selector(keyDown:)],
+             [UIKeyCommand keyCommandWithInput:UIKeyInputDownArrow modifierFlags:UIKeyModifierAlternate action:@selector(keyDown:)],
 
-             [UIKeyCommand keyCommandWithInput:UIKeyInputLeftArrow modifierFlags:0 action:@selector(keyLeft)],
-             [UIKeyCommand keyCommandWithInput:UIKeyInputLeftArrow modifierFlags:UIKeyModifierShift action:@selector(keyLeftShift)],
-             [UIKeyCommand keyCommandWithInput:UIKeyInputLeftArrow modifierFlags:UIKeyModifierAlternate action:@selector(keyLeftAlternate)],
+             [UIKeyCommand keyCommandWithInput:UIKeyInputLeftArrow modifierFlags:0 action:@selector(keyLeft:)],
+             [UIKeyCommand keyCommandWithInput:UIKeyInputLeftArrow modifierFlags:UIKeyModifierShift action:@selector(keyLeft:)],
+             [UIKeyCommand keyCommandWithInput:UIKeyInputLeftArrow modifierFlags:UIKeyModifierAlternate action:@selector(keyLeft:)],
              
-             [UIKeyCommand keyCommandWithInput:UIKeyInputRightArrow modifierFlags:0 action:@selector(keyRight)],
-             [UIKeyCommand keyCommandWithInput:UIKeyInputRightArrow modifierFlags:UIKeyModifierShift action:@selector(keyRightShift)],
-             [UIKeyCommand keyCommandWithInput:UIKeyInputRightArrow modifierFlags:UIKeyModifierAlternate action:@selector(keyRightAlternate)],
+             [UIKeyCommand keyCommandWithInput:UIKeyInputRightArrow modifierFlags:0 action:@selector(keyRight:)],
+             [UIKeyCommand keyCommandWithInput:UIKeyInputRightArrow modifierFlags:UIKeyModifierShift action:@selector(keyRight:)],
+             [UIKeyCommand keyCommandWithInput:UIKeyInputRightArrow modifierFlags:UIKeyModifierAlternate action:@selector(keyRight:)],
              
              ];
 }
+
+#endif
 
 - (void) invoke {
     [self.keyboardInputDelegate invokeIntrospector];
@@ -98,39 +100,39 @@
 }
 
 - (void) nudgeViewLeft {
-    [self.keyboardInputDelegate manipulateFrame:FrameManipulationNudgeLeft];
+    [self.keyboardInputDelegate manipulateFrame:FrameManipulationNudgeLeft withBigStep:NO];
 }
 
 - (void) nudgeViewRight {
-    [self.keyboardInputDelegate manipulateFrame:FrameManipulationNudgeRight];
+    [self.keyboardInputDelegate manipulateFrame:FrameManipulationNudgeRight withBigStep:NO];
 }
 
 - (void) nudgeViewUp {
-    [self.keyboardInputDelegate manipulateFrame:FrameManipulationNudgeUp];
+    [self.keyboardInputDelegate manipulateFrame:FrameManipulationNudgeUp withBigStep:NO];
 }
 
 - (void) nudgeViewDown {
-    [self.keyboardInputDelegate manipulateFrame:FrameManipulationNudgeDown];
+    [self.keyboardInputDelegate manipulateFrame:FrameManipulationNudgeDown withBigStep:NO];
 }
 
 - (void) centerInSuperview {
-    [self.keyboardInputDelegate manipulateFrame:FrameManipulationCenterInSuperview];
+    [self.keyboardInputDelegate manipulateFrame:FrameManipulationCenterInSuperview withBigStep:NO];
 }
 
 - (void) increaseWidth {
-    [self.keyboardInputDelegate manipulateFrame:FrameManipulationIncreaseWidth];
+    [self.keyboardInputDelegate manipulateFrame:FrameManipulationIncreaseWidth withBigStep:NO];
 }
 
 - (void) decreaseWidth {
-    [self.keyboardInputDelegate manipulateFrame:FrameManipulationDecreaseWidth];
+    [self.keyboardInputDelegate manipulateFrame:FrameManipulationDecreaseWidth withBigStep:NO];
 }
 
 - (void) increaseHeight {
-    [self.keyboardInputDelegate manipulateFrame:FrameManipulationIncreaseHeight];
+    [self.keyboardInputDelegate manipulateFrame:FrameManipulationIncreaseHeight withBigStep:NO];
 }
 
 - (void) decreaseHeight {
-    [self.keyboardInputDelegate manipulateFrame:FrameManipulationDecreaseHeight];
+    [self.keyboardInputDelegate manipulateFrame:FrameManipulationDecreaseHeight withBigStep:NO];
 }
 
 - (void) logCodeForCurrentViewChanges {
@@ -138,11 +140,11 @@
 }
 
 - (void) increaseViewAlpha {
-    [self.keyboardInputDelegate manipulateFrame:FrameManipulationIncreaseAlpha];
+    [self.keyboardInputDelegate manipulateFrame:FrameManipulationIncreaseAlpha withBigStep:NO];
 }
 
 - (void) decreaseViewAlpha {
-    [self.keyboardInputDelegate manipulateFrame:FrameManipulationDecreaseAlpha];
+    [self.keyboardInputDelegate manipulateFrame:FrameManipulationDecreaseAlpha withBigStep:NO];
 }
 
 - (void) forceSetNeedsDisplay {
@@ -209,54 +211,60 @@
     [self.keyboardInputDelegate disableForPeriod];
 }
 
-- (void) keyLeft {
-    [self.keyboardInputDelegate handleKey:KeyDirectionLeft modifier:KeyModifierNone];
+- (void) keyLeft: (UIKeyCommand*) sender {
+    switch (sender.modifierFlags) {
+        case UIKeyModifierShift:
+            [self.keyboardInputDelegate manipulateFrame:FrameManipulationNudgeLeft withBigStep:YES];
+            break;
+        case UIKeyModifierAlternate:
+            [self.keyboardInputDelegate manipulateFrame:FrameManipulationDecreaseWidth withBigStep:NO];
+            break;
+        default:
+            [self.keyboardInputDelegate manipulateFrame:FrameManipulationNudgeLeft withBigStep:NO];
+            break;
+    }
 }
 
-- (void) keyLeftShift {
-    [self.keyboardInputDelegate handleKey:KeyDirectionLeft modifier:KeyModifierShift];
+- (void) keyRight: (UIKeyCommand*) sender {
+    switch (sender.modifierFlags) {
+        case UIKeyModifierShift:
+            [self.keyboardInputDelegate manipulateFrame:FrameManipulationNudgeRight withBigStep:YES];
+            break;
+        case UIKeyModifierAlternate:
+            [self.keyboardInputDelegate manipulateFrame:FrameManipulationIncreaseWidth withBigStep:NO];
+            break;
+        default:
+            [self.keyboardInputDelegate manipulateFrame:FrameManipulationNudgeRight withBigStep:NO];
+            break;
+    }
 }
 
-- (void) keyLeftAlternate {
-    [self.keyboardInputDelegate handleKey:KeyDirectionLeft modifier:KeyModifierAlternate];
+- (void) keyUp: (UIKeyCommand*) sender {
+    switch (sender.modifierFlags) {
+        case UIKeyModifierShift:
+            [self.keyboardInputDelegate manipulateFrame:FrameManipulationNudgeUp withBigStep:YES];
+            break;
+        case UIKeyModifierAlternate:
+            [self.keyboardInputDelegate manipulateFrame:FrameManipulationDecreaseHeight withBigStep:NO];
+            break;
+        default:
+            [self.keyboardInputDelegate manipulateFrame:FrameManipulationNudgeUp withBigStep:NO];
+            break;
+    }
 }
 
-- (void) keyRight {
-    [self.keyboardInputDelegate handleKey:KeyDirectionRight modifier:KeyModifierNone];
+- (void) keyDown: (UIKeyCommand*) sender {
+    switch (sender.modifierFlags) {
+        case UIKeyModifierShift:
+            [self.keyboardInputDelegate manipulateFrame:FrameManipulationNudgeDown withBigStep:YES];
+            break;
+        case UIKeyModifierAlternate:
+            [self.keyboardInputDelegate manipulateFrame:FrameManipulationIncreaseHeight withBigStep:NO];
+            break;
+        default:
+            [self.keyboardInputDelegate manipulateFrame:FrameManipulationNudgeDown withBigStep:NO];
+            break;
+    }
 }
-
-- (void) keyRightShift {
-    [self.keyboardInputDelegate handleKey:KeyDirectionRight modifier:KeyModifierShift];
-}
-
-- (void) keyRightAlternate {
-    [self.keyboardInputDelegate handleKey:KeyDirectionRight modifier:KeyModifierAlternate];
-}
-
-- (void) keyUp {
-    [self.keyboardInputDelegate handleKey:KeyDirectionUp modifier:KeyModifierNone];
-}
-
-- (void) keyUpShift {
-    [self.keyboardInputDelegate handleKey:KeyDirectionUp modifier:KeyModifierShift];
-}
-
-- (void) keyUpAlternate {
-    [self.keyboardInputDelegate handleKey:KeyDirectionUp modifier:KeyModifierAlternate];
-}
-
-- (void) keyDown {
-    [self.keyboardInputDelegate handleKey:KeyDirectionDown modifier:KeyModifierNone];
-}
-
-- (void) keyDownShift {
-    [self.keyboardInputDelegate handleKey:KeyDirectionDown modifier:KeyModifierShift];
-}
-
-- (void) keyDownAlternate {
-    [self.keyboardInputDelegate handleKey:KeyDirectionDown modifier:KeyModifierAlternate];
-}
-
-#endif
 
 @end

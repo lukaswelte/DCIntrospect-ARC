@@ -383,37 +383,38 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 	if (shiftKey)
 	{
 		if (selectionLocation == 4 && selectionLength == 1)
-            [self handleKey:KeyDirectionLeft modifier:KeyModifierShift];
+            [self manipulateFrame:FrameManipulationNudgeLeft withBigStep:YES];
 		else if (selectionLocation == 5 && selectionLength == 1)
-            [self handleKey:KeyDirectionRight modifier:KeyModifierShift];
+            [self manipulateFrame:FrameManipulationNudgeRight withBigStep:YES];
 		else if (selectionLocation == 0 && selectionLength == 5)
-			[self handleKey:KeyDirectionUp modifier:KeyModifierShift];
+			[self manipulateFrame:FrameManipulationNudgeUp withBigStep:YES];
 		else if (selectionLocation == 5 && selectionLength == 5)
-			[self handleKey:KeyDirectionDown modifier:KeyModifierShift];
+			[self manipulateFrame:FrameManipulationNudgeDown withBigStep:YES];
 	}
 	else if (optionKey)
 	{
 		if (selectionLocation == 7)
-			[self handleKey:KeyDirectionRight modifier:KeyModifierAlternate];
+			[self manipulateFrame:FrameManipulationIncreaseWidth withBigStep:NO];
 		else if (selectionLocation == 3)
-			[self handleKey:KeyDirectionLeft modifier:KeyModifierAlternate];
+			[self manipulateFrame:FrameManipulationDecreaseWidth withBigStep:NO];
 		else if (selectionLocation == 9)
-			[self handleKey:KeyDirectionDown modifier:KeyModifierAlternate];
+			[self manipulateFrame:FrameManipulationIncreaseHeight withBigStep:NO];
 		else if (selectionLocation == 1)
-			[self handleKey:KeyDirectionUp modifier:KeyModifierAlternate];
+			[self manipulateFrame:FrameManipulationDecreaseHeight withBigStep:NO];
 	}
 	else
 	{
 		if (selectionLocation == 4)
-			[self handleKey:KeyDirectionLeft modifier:KeyModifierNone];
+			[self manipulateFrame:FrameManipulationNudgeLeft withBigStep:NO];
 		else if (selectionLocation == 6)
-			[self handleKey:KeyDirectionRight modifier:KeyModifierNone];
+			[self manipulateFrame:FrameManipulationNudgeRight withBigStep:NO];
 		else if (selectionLocation == 0)
-			[self handleKey:KeyDirectionUp modifier:KeyModifierNone];
+			[self manipulateFrame:FrameManipulationNudgeUp withBigStep:NO];
 		else if (selectionLocation == 10)
-			[self handleKey:KeyDirectionDown modifier:KeyModifierNone];
+			[self manipulateFrame:FrameManipulationNudgeDown withBigStep:NO];
 	}
 	
+    self.handleArrowKeys = NO; //option-down arrow will get handled twice if key handling isn't disabled immediately
     [self performSelector:@selector(resetInputTextView) withObject:nil afterDelay:0.0]; //selectedRange doesn't reset correctly on iOS 6 if this isn't performed with a delay
 }
 
@@ -554,27 +555,27 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 		}
 		
 		if ([string isEqualToString:kDCIntrospectKeysNudgeViewLeft])
-			[self manipulateFrame:FrameManipulationNudgeLeft];
+			[self manipulateFrame:FrameManipulationNudgeLeft withBigStep:NO];
 		else if ([string isEqualToString:kDCIntrospectKeysNudgeViewRight])
-			[self manipulateFrame:FrameManipulationNudgeRight];
+			[self manipulateFrame:FrameManipulationNudgeRight withBigStep:NO];
 		else if ([string isEqualToString:kDCIntrospectKeysNudgeViewUp])
-			[self manipulateFrame:FrameManipulationNudgeUp];
+			[self manipulateFrame:FrameManipulationNudgeUp withBigStep:NO];
 		else if ([string isEqualToString:kDCIntrospectKeysNudgeViewDown])
-			[self manipulateFrame:FrameManipulationNudgeDown];
+			[self manipulateFrame:FrameManipulationNudgeDown withBigStep:NO];
 		else if ([string isEqualToString:kDCIntrospectKeysCenterInSuperview])
-			[self manipulateFrame:FrameManipulationCenterInSuperview];
+			[self manipulateFrame:FrameManipulationCenterInSuperview withBigStep:NO];
 		else if ([string isEqualToString:kDCIntrospectKeysIncreaseWidth])
-			[self manipulateFrame:FrameManipulationIncreaseWidth];
+			[self manipulateFrame:FrameManipulationIncreaseWidth withBigStep:NO];
 		else if ([string isEqualToString:kDCIntrospectKeysDecreaseWidth])
-			[self manipulateFrame:FrameManipulationDecreaseWidth];
+			[self manipulateFrame:FrameManipulationDecreaseWidth withBigStep:NO];
 		else if ([string isEqualToString:kDCIntrospectKeysIncreaseHeight])
-			[self manipulateFrame:FrameManipulationIncreaseHeight];
+			[self manipulateFrame:FrameManipulationIncreaseHeight withBigStep:NO];
 		else if ([string isEqualToString:kDCIntrospectKeysDecreaseHeight])
-			[self manipulateFrame:FrameManipulationDecreaseHeight];
+			[self manipulateFrame:FrameManipulationDecreaseHeight withBigStep:NO];
 		else if ([string isEqualToString:kDCIntrospectKeysIncreaseViewAlpha])
-            [self manipulateFrame:FrameManipulationIncreaseAlpha];
+            [self manipulateFrame:FrameManipulationIncreaseAlpha withBigStep:NO];
 		else if ([string isEqualToString:kDCIntrospectKeysDecreaseViewAlpha])
-            [self manipulateFrame:FrameManipulationDecreaseAlpha];
+            [self manipulateFrame:FrameManipulationDecreaseAlpha withBigStep:NO];
 	}
 	
 	return NO;
@@ -830,6 +831,15 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 
 - (void)toggleOutlines
 {
+    if (!self.on)
+		return;
+	
+	if (self.showingHelp)
+	{
+		[self toggleHelp];
+		return;
+	}
+    
 	UIWindow *mainWindow = [self mainWindow];
 	self.viewOutlines = !self.viewOutlines;
 	
@@ -864,6 +874,15 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 
 - (void)toggleNonOpaqueViews
 {
+    if (!self.on)
+		return;
+	
+	if (self.showingHelp)
+	{
+		[self toggleHelp];
+		return;
+	}
+    
 	self.highlightNonOpaqueViews = !self.highlightNonOpaqueViews;
 	
 	UIWindow *mainWindow = [self mainWindow];
@@ -893,6 +912,15 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 
 - (void)toggleAmbiguousLayouts
 {
+    if (!self.on)
+		return;
+	
+	if (self.showingHelp)
+	{
+		[self toggleHelp];
+		return;
+	}
+    
 	self.highlightAmbiguousLayouts = !self.highlightAmbiguousLayouts;
 	
 	UIWindow *mainWindow = [self mainWindow];
@@ -929,6 +957,15 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 
 - (void)toggleRedrawFlashing
 {
+    if (!self.on)
+		return;
+	
+	if (self.showingHelp)
+	{
+		[self toggleHelp];
+		return;
+	}
+    
 	self.flashOnRedraw = !self.flashOnRedraw;
 	NSString *string = [NSString stringWithFormat:@"Flashing on redraw is %@", (self.flashOnRedraw) ? @"on" : @"off"];
 	if (self.showStatusBarOverlay)
@@ -941,6 +978,15 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 }
 
 - (void)toggleShowCoordinates {
+    if (!self.on)
+		return;
+	
+	if (self.showingHelp)
+	{
+		[self toggleHelp];
+		return;
+	}
+    
     [UIView animateWithDuration:0.15
                           delay:0
                         options:UIViewAnimationOptionAllowUserInteraction
@@ -1106,23 +1152,25 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
     DEBUGGER;
 }
 
-- (void)manipulateFrame:(FrameManipulation)manipulation {
+- (void)manipulateFrame:(FrameManipulation)manipulation withBigStep:(BOOL)bigstep {
     if (!self.on || !self.currentView)
         return;
     
     CGRect frame = self.currentView.frame;
+    CGFloat commandOffset = bigstep ? 10.0f : 1.0f;
+    
     switch (manipulation) {
         case FrameManipulationNudgeLeft:
-            frame.origin.x -= 1.0f;
+            frame.origin.x -= commandOffset;
             break;
         case FrameManipulationNudgeRight:
-            frame.origin.x += 1.0f;
+            frame.origin.x += commandOffset;
             break;
         case FrameManipulationNudgeUp:
-            frame.origin.y -= 1.0f;
+            frame.origin.y -= commandOffset;
             break;
         case FrameManipulationNudgeDown:
-            frame.origin.y += 1.0f;
+            frame.origin.y += commandOffset;
             break;
         case FrameManipulationCenterInSuperview:
             frame = CGRectMake(floorf((self.currentView.superview.frame.size.width - frame.size.width) / 2.0f),
@@ -1131,16 +1179,16 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
                                frame.size.height);
             break;
         case FrameManipulationIncreaseWidth:
-            frame.size.width += 1.0f;
+            frame.size.width += commandOffset;
             break;
         case FrameManipulationDecreaseWidth:
-            frame.size.width -= 1.0f;
+            frame.size.width -= commandOffset;
             break;
         case FrameManipulationIncreaseHeight:
-            frame.size.height += 1.0f;
+            frame.size.height += commandOffset;
             break;
         case FrameManipulationDecreaseHeight:
-            frame.size.height -= 1.0f;
+            frame.size.height -= commandOffset;
             break;
         case FrameManipulationIncreaseAlpha:
             if (self.currentView.alpha < 1.0f)
@@ -1161,77 +1209,6 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
     
     [self updateFrameView];
     [self updateStatusBar];
-}
-
-- (void)handleKey:(KeyDirection)keyDirection modifier:(KeyModifier)modifier {
-    CGRect frame = self.currentView.frame;
-	if (modifier == KeyModifierShift)
-	{
-        switch (keyDirection) {
-            case KeyDirectionLeft:
-                frame.origin.x -= 10.0f;
-                break;
-            case KeyDirectionRight:
-                frame.origin.x += 10.0f;
-                break;
-            case KeyDirectionDown:
-                frame.origin.y += 10.0f;
-                break;
-            case KeyDirectionUp:
-                frame.origin.y -= 10.0f;
-                break;
-            default:
-                break;
-        }
-	}
-	else if (modifier == KeyModifierAlternate)
-	{
-        switch (keyDirection) {
-            case KeyDirectionLeft:
-                frame.size.width -= 1.0f;
-                break;
-            case KeyDirectionRight:
-                frame.size.width += 1.0f;
-                break;
-            case KeyDirectionDown:
-                frame.size.height += 1.0f;
-                break;
-            case KeyDirectionUp:
-                frame.size.height -= 1.0f;
-                break;
-            default:
-                break;
-        }
-	}
-	else
-	{
-        switch (keyDirection) {
-            case KeyDirectionLeft:
-                frame.origin.x -= 1.0f;
-                break;
-            case KeyDirectionRight:
-                frame.origin.x += 1.0f;
-                break;
-            case KeyDirectionDown:
-                frame.origin.y += 1.0f;
-                break;
-            case KeyDirectionUp:
-                frame.origin.y -= 1.0f;
-                break;
-            default:
-                break;
-        }
-	}
-	
-	self.currentView.frame = CGRectMake(floorf(frame.origin.x),
-										floorf(frame.origin.y),
-										floorf(frame.size.width),
-										floorf(frame.size.height));
-	
-	[self updateFrameView];
-	[self updateStatusBar];
-	
-    self.handleArrowKeys = NO; //option-down arrow will get handled twice if key handling isn't disabled immediately
 }
 
 #pragma mark Description Methods
@@ -1556,6 +1533,9 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 
 - (void)toggleHelp
 {
+    if (!self.on)
+		return;
+    
 	UIWindow *mainWindow = [self mainWindow];
 	self.showingHelp = !self.showingHelp;
 	
