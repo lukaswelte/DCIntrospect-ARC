@@ -1792,7 +1792,9 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 	
 	[outputString appendFormat:@"** %@ Accessibility Properties **\n", className];
 	[outputString appendFormat:@"     label: %@\n", [object accessibilityLabel]];
-    [outputString appendFormat:@"identifier: %@\n", [object accessibilityIdentifier]];
+    if ([object respondsToSelector:@selector(accessibilityIdentifier)]) {
+        [outputString appendFormat:@"identifier: %@\n", [object accessibilityIdentifier]];
+    }
 	[outputString appendFormat:@"      hint: %@\n", [object accessibilityHint]];
 	[outputString appendFormat:@"    traits: %@\n", [self describeProperty:@"accessibilityTraits" value:[NSNumber numberWithUnsignedLongLong:[object accessibilityTraits]]]];
 	[outputString appendFormat:@"     value: %@\n", [object accessibilityValue]];
