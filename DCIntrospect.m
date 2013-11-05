@@ -1791,11 +1791,12 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 		[outputString appendString:@"\n\n** Warning: Logging accessibility properties requires Accessibility Inspector: Settings.app -> General -> Accessibility\n"];
 	
 	[outputString appendFormat:@"** %@ Accessibility Properties **\n", className];
-	[outputString appendFormat:@"	label: %@\n", [object accessibilityLabel]];
-	[outputString appendFormat:@"	hint: %@\n", [object accessibilityHint]];
-	[outputString appendFormat:@"	traits: %@\n", [self describeProperty:@"accessibilityTraits" value:[NSNumber numberWithUnsignedLongLong:[object accessibilityTraits]]]];
-	[outputString appendFormat:@"	value: %@\n", [object accessibilityValue]];
-	[outputString appendFormat:@"	frame: %@\n", NSStringFromCGRect([object accessibilityFrame])];
+	[outputString appendFormat:@"     label: %@\n", [object accessibilityLabel]];
+    [outputString appendFormat:@"identifier: %@\n", [object accessibilityIdentifier]];
+	[outputString appendFormat:@"      hint: %@\n", [object accessibilityHint]];
+	[outputString appendFormat:@"    traits: %@\n", [self describeProperty:@"accessibilityTraits" value:[NSNumber numberWithUnsignedLongLong:[object accessibilityTraits]]]];
+	[outputString appendFormat:@"     value: %@\n", [object accessibilityValue]];
+	[outputString appendFormat:@"     frame: %@\n", NSStringFromCGRect([object accessibilityFrame])];
 	[outputString appendString:@"\n"];
 	
 	NSLog(@"DCIntrospect: %@", outputString);
