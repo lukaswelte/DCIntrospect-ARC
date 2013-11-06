@@ -69,8 +69,6 @@
              ];
 }
 
-#endif
-
 - (void) invoke {
     [self.keyboardInputDelegate invokeIntrospector];
 }
@@ -266,5 +264,7 @@
             break;
     }
 }
+
+#endif
 
 @end
