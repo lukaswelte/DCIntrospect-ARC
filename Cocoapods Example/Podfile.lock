@@ -1,0 +1,14 @@
+PODS:
+  - DCIntrospect-ARC (0.0.6)
+
+DEPENDENCIES:
+  - DCIntrospect-ARC (from `../DCIntrospect-ARC.podspec`)
+
+EXTERNAL SOURCES:
+  DCIntrospect-ARC:
+    :path: ../DCIntrospect-ARC.podspec
+
+SPEC CHECKSUMS:
+  DCIntrospect-ARC: 41cae8dbe48748e77a4466963896df13889df041
+
+COCOAPODS: 0.24.0

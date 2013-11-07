@@ -171,7 +171,7 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 	UIWindow *mainWindow = [self mainWindow];
 	if (!mainWindow)
 	{
-		NSLog(@"DCIntrospect: Couldn't setup.  No main window?");
+		NSLog(@"DCIntrospect-ARC: Couldn't setup.  No main window?");
 		return;
 	}
 	
@@ -244,13 +244,13 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 	if (!self.currentViewHistory)
 		self.currentViewHistory = [[NSMutableArray alloc] init];
 	
-	NSLog(@"DCIntrospect is setup. %@ to start.", [kDCIntrospectKeysInvoke isEqualToString:@" "] ? @"Push the space bar" : [NSString stringWithFormat:@"Type '%@'",  kDCIntrospectKeysInvoke]);
+	NSLog(@"DCIntrospect-ARC is setup. %@ to start.", [kDCIntrospectKeysInvoke isEqualToString:@" "] ? @"Push the space bar" : [NSString stringWithFormat:@"Type '%@'",  kDCIntrospectKeysInvoke]);
 }
 
 - (void)takeFirstResponder
 {
 	if (![self.inputTextView becomeFirstResponder])
-		NSLog(@"DCIntrospect: Couldn't reclaim keyboard input.  Is the keyboard used elsewhere?");
+		NSLog(@"DCIntrospect-ARC: Couldn't reclaim keyboard input.  Is the keyboard used elsewhere?");
 }
 
 - (void)resetInputTextView
@@ -604,7 +604,7 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 	}
 	
 	if (outputString.length == 0)
-		NSLog(@"DCIntrospect: No changes made to %@.", self.currentView.class);
+		NSLog(@"DCIntrospect-ARC: No changes made to %@.", self.currentView.class);
 	else
 		printf("\n\n%s\n", [outputString UTF8String]);
 }
@@ -730,7 +730,7 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 	}
 	else
 	{
-		self.statusBarOverlay.leftLabel.text = @"DCIntrospect";
+		self.statusBarOverlay.leftLabel.text = @"DCIntrospect-ARC";
 		self.statusBarOverlay.rightLabel.text = [NSString stringWithFormat:@"'%@' for help", kDCIntrospectKeysToggleHelp];
 	}
 	
@@ -787,7 +787,7 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 - (void)disableForPeriod {
     [self setKeyboardBindingsOn:NO];
     [[self inputTextView] resignFirstResponder];
-    NSLog(@"DCIntrospect: Disabled for %.1f seconds", kDCIntrospectTemporaryDisableDuration);
+    NSLog(@"DCIntrospect-ARC: Disabled for %.1f seconds", kDCIntrospectTemporaryDisableDuration);
     [self performSelector:@selector(setKeyboardBindingsOn:) withObject:[NSNumber numberWithFloat:YES] afterDelay:kDCIntrospectTemporaryDisableDuration];
 }
 
@@ -802,7 +802,7 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 {
 #ifdef DEBUG
 	// [UIView recursiveDescription] is a private method.  This should probably be re-written to avoid any potential problems.
-	NSLog(@"DCIntrospect: %@", [view recursiveDescription]);
+	NSLog(@"DCIntrospect-ARC: %@", [view recursiveDescription]);
 #endif
 }
 
@@ -854,7 +854,7 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 	if (self.showStatusBarOverlay)
 		[self showTemporaryStringInStatusBar:string];
 	else
-		NSLog(@"DCIntrospect: %@", string);
+		NSLog(@"DCIntrospect-ARC: %@", string);
 }
 
 - (void)addOutlinesToFrameViewFromSubview:(UIView *)view
@@ -893,7 +893,7 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 	if (self.showStatusBarOverlay)
 		[self showTemporaryStringInStatusBar:string];
 	else
-		NSLog(@"DCIntrospect: %@", string);
+		NSLog(@"DCIntrospect-ARC: %@", string);
 }
 
 - (void)setBackgroundColor:(UIColor *)color ofNonOpaqueViewsInSubview:(UIView *)view
@@ -930,7 +930,7 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 	if (self.showStatusBarOverlay)
 		[self showTemporaryStringInStatusBar:string];
 	else
-		NSLog(@"DCIntrospect: %@", string);
+		NSLog(@"DCIntrospect-ARC: %@", string);
 }
 
 - (void)toggleAmbiguousLayoutsOfSubiew:(UIView *)view
@@ -971,7 +971,7 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 	if (self.showStatusBarOverlay)
 		[self showTemporaryStringInStatusBar:string];
 	else
-		NSLog(@"DCIntrospect: %@", string);
+		NSLog(@"DCIntrospect-ARC: %@", string);
 	
 	// flash all views to show what is working
 	[self callDrawRectOnViewsInSubview:[self mainWindow]];
@@ -997,7 +997,7 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
                          if (self.showStatusBarOverlay)
                              [self showTemporaryStringInStatusBar:coordinatesString];
                          else
-                             NSLog(@"DCIntrospect: %@", coordinatesString);
+                             NSLog(@"DCIntrospect-ARC: %@", coordinatesString);
                      }];
 }
 
@@ -1030,7 +1030,7 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 	if ([view respondsToSelector:@selector(hasAmbiguousLayout)])
 	{
 		BOOL hasAmbiguousLayout = [view hasAmbiguousLayout];
-		NSLog(@"DCIntrospect: ambiguous layout? %@", hasAmbiguousLayout ? @"YES" : @"NO");
+		NSLog(@"DCIntrospect-ARC: ambiguous layout? %@", hasAmbiguousLayout ? @"YES" : @"NO");
 		if (hasAmbiguousLayout)
 			[view exerciseAmbiguityInLayout];
 	}
@@ -1039,14 +1039,14 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 - (void)logHorizontalConstraintsForView:(UIView *)view
 {
 	if ([view respondsToSelector:@selector(constraintsAffectingLayoutForAxis:)])
-		NSLog(@"DCIntrospect: constraints for horizontal axis: %@",
+		NSLog(@"DCIntrospect-ARC: constraints for horizontal axis: %@",
 			  [view constraintsAffectingLayoutForAxis:UILayoutConstraintAxisHorizontal]);
 }
 
 - (void)logVerticalConstraintsForView:(UIView *)view
 {
 	if ([view respondsToSelector:@selector(constraintsAffectingLayoutForAxis:)])
-		NSLog(@"DCIntrospect: constraints for vertical axis: %@",
+		NSLog(@"DCIntrospect-ARC: constraints for vertical axis: %@",
 			  [view constraintsAffectingLayoutForAxis:UILayoutConstraintAxisVertical]);
 }
 
@@ -1084,7 +1084,7 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
     }
     else
     {
-        NSLog(@"DCIntrospect: At top of view hierarchy.");
+        NSLog(@"DCIntrospect-ARC: At top of view hierarchy.");
     }
 }
 
@@ -1095,7 +1095,7 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
     NSUInteger indexOfCurrentView = [self.currentViewHistory indexOfObject:self.currentView];
     if (indexOfCurrentView == 0)
     {
-        NSLog(@"DCIntrospect: At bottom of view history.");
+        NSLog(@"DCIntrospect-ARC: At bottom of view history.");
         return;
     }
     
@@ -1109,7 +1109,7 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
     if (self.currentView.subviews.count>0) {
         [self selectView:[self.currentView.subviews objectAtIndex:0]];
     } else{
-        NSLog(@"DCIntrospect: No subviews.");
+        NSLog(@"DCIntrospect-ARC: No subviews.");
     }
 }
 
@@ -1120,11 +1120,11 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
     NSUInteger currentViewsIndex = [self.currentView.superview.subviews indexOfObject:self.currentView];
     
     if (currentViewsIndex==NSNotFound) {
-        NSLog(@"DCIntrospect: BROKEN HIERARCHY.");
+        NSLog(@"DCIntrospect-ARC: BROKEN HIERARCHY.");
     } else if (self.currentView.superview.subviews.count>currentViewsIndex + 1) {
         [self selectView:[self.currentView.superview.subviews objectAtIndex:currentViewsIndex + 1]];
     } else{
-        NSLog(@"DCIntrospect: No next sibling views.");
+        NSLog(@"DCIntrospect-ARC: No next sibling views.");
     }
 }
 
@@ -1134,11 +1134,11 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
     
     NSUInteger currentViewsIndex = [self.currentView.superview.subviews indexOfObject:self.currentView];
     if (currentViewsIndex==NSNotFound) {
-        NSLog(@"DCIntrospect: BROKEN HIERARCHY.");
+        NSLog(@"DCIntrospect-ARC: BROKEN HIERARCHY.");
     } else if (currentViewsIndex!=0) {
         [self selectView:[self.currentView.superview.subviews objectAtIndex:currentViewsIndex - 1]];
     } else {
-        NSLog(@"DCIntrospect: No previous sibling views.");
+        NSLog(@"DCIntrospect-ARC: No previous sibling views.");
     }
 }
 
@@ -1148,7 +1148,7 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
     
     UIView *view = self.currentView;
     view.tag = view.tag;	// suppress the xcode warning about an unused variable.
-    NSLog(@"DCIntrospect: access current view using local 'view' variable.");
+    NSLog(@"DCIntrospect-ARC: access current view using local 'view' variable.");
     DEBUGGER;
 }
 
@@ -1542,7 +1542,7 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 	if (self.showingHelp)
 	{
 		self.statusBarOverlay.leftLabel.text = @"Help";
-		self.statusBarOverlay.rightLabel.text = @"Any key to close";
+		self.statusBarOverlay.rightLabel.text = [NSString stringWithFormat:@"'%@' or 'c' to close",kDCIntrospectKeysToggleHelp];
 		UIView *backingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, mainWindow.frame.size.width, mainWindow.frame.size.height)];
 		backingView.tag = 1548;
 		backingView.alpha = 0;
@@ -1564,7 +1564,6 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 		
 		[helpString appendString:@"</style></head><body><h1>DCIntrospect-ARC</h1>"];
 		[helpString appendString:@"<p>Created  by <a href='http://lukaswelte.de'>Lukas Welte</a> 2013.</p>"];
-		[helpString appendString:@"<p>Twitter: <a href='http://twitter.com/l0gicreative'>@l0gicreative</a></p>"];
 		[helpString appendString:@"<p>More info and full documentation: <a href='http://logicreative.github.io/DCIntrospect-ARC/'>logicreative.github.io/DCIntrospect-ARC/</a></p>"];
 		[helpString appendString:@"<p>GitHub project: <a href='https://github.com/logicreative/DCIntrospect-ARC'>github.com/logicreative/DCIntrospect-ARC/</a></p>"];
 		[helpString appendString:@"<p>Forked from <a href='https://github.com/logicreative/DCIntrospect'>DCIntrospect</a></p>"];
@@ -1773,7 +1772,7 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 	}
 	
 	[outputString appendString:@"\n"];
-	NSLog(@"DCIntrospect: %@", outputString);
+	NSLog(@"DCIntrospect-ARC: %@", outputString);
 	
 	free(properties);
     free(buffer);
@@ -1801,7 +1800,7 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 	[outputString appendFormat:@"     frame: %@\n", NSStringFromCGRect([object accessibilityFrame])];
 	[outputString appendString:@"\n"];
 	
-	NSLog(@"DCIntrospect: %@", outputString);
+	NSLog(@"DCIntrospect-ARC: %@", outputString);
 }
 
 - (NSArray *)subclassesOfClass:(Class)parentClass
