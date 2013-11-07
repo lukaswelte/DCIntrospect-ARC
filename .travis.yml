@@ -2,4 +2,4 @@ language: objective-c
 before_install:
     - brew update
     - brew uninstall xctool && brew install xctool
-script: xctool -workspace travis/Travis.xcworkspace -scheme Example build test -sdk iphonesimulator
+script: xctool -project Example/Example.xcodeproj -scheme Example build -sdk iphonesimulator
