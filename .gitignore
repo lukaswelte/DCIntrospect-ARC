@@ -4,6 +4,7 @@ profile
 
 # xcode noise
 build/*
+Example/build/*
 *.mode1
 *.mode1v3
 *.mode2v3
