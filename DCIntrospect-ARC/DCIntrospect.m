@@ -15,6 +15,8 @@
 #include <unistd.h>
 #include <sys/sysctl.h>
 
+BOOL iOS7OrHigher(void);
+
 #define IS_IOS7_AND_UP ([[UIDevice currentDevice].systemVersion floatValue] >= 7.0)
 
 // break into GDB code complied from following sources: 
