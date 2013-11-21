@@ -1,12 +1,11 @@
-#DCIntrospect-ARC  
+#DCIntrospect-ARC 
+
+[![Build Status](https://travis-ci.org/logicreative/DCIntrospect-ARC.png?branch=master)](https://travis-ci.org/logicreative/DCIntrospect-ARC)
 
 Twitter: [@l0gicreative](http://twitter.com/l0gicreative)  
 Website: http://lukaswelte.de  
 
 [DCIntrospect](https://github.com/domesticcatsoftware/DCIntrospect) was originally done by [domesticcat](http://domesticcat.com.au) and is small set of tools for iOS that aid in debugging user interfaces built with UIKit.  It's especially useful for UI layouts that are dynamically created or can change during runtime, or for tuning performance by finding non-opaque views or views that are re-drawing unnecessarily.  It's designed for use in the iPhone simulator, but can also be used on a device.
-
-
-![Introspect Demo Image](http://domesticcat.com.au/projects/introspect/introspectdemo.png)
 
 
 It uses keyboard shortcuts to handle starting, ending and other commands.  It can also be invoked via an app-wide `UIGestureRecognizer` if it is to be used on the device.

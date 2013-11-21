@@ -83,16 +83,18 @@
 
 	CGRect mainRectOffset = CGRectOffset(self.mainRect, -self.superRect.origin.x, -self.superRect.origin.y);
 	BOOL showAntialiasingWarning = NO;
+	BOOL retinaScreen = [UIScreen mainScreen].scale == 2.0;
+
 	if (! CGRectIsEmpty(self.superRect))
 	{
-		if ((mainRectOffset.origin.x != floorf(mainRectOffset.origin.x) && self.mainRect.origin.x != 0) || (mainRectOffset.origin.y != floor(mainRectOffset.origin.y) && self.mainRect.origin.y != 0))
+		if ((CGRectGetMinX(mainRectOffset) != floorf(CGRectGetMinX(mainRectOffset)) && CGRectGetMinX(self.mainRect) != 0 && !(retinaScreen && fmodf(CGRectGetMinX(mainRectOffset), 0.5) == 0.0)) || (CGRectGetMinY(mainRectOffset) != floorf(CGRectGetMinY(mainRectOffset)) && CGRectGetMinY(self.mainRect) != 0 && !(retinaScreen && fmodf(CGRectGetMinY(mainRectOffset), 0.5) == 0.0)))
 		showAntialiasingWarning = YES;
 	}
 
 	if (showAntialiasingWarning)
 	{
 		[[UIColor redColor] set];
-		NSLog(@"DCIntrospect: *** WARNING: One or more values of this view's frame are non-integer values. This view will likely look blurry. ***");
+		NSLog(@"DCIntrospect-ARC: *** WARNING: One or more values of this view's frame are non-integer values. This view will likely look blurry. ***");
 	}
 	else
 	{
@@ -114,8 +116,9 @@
 	CGContextMoveToPoint(context, CGRectGetMinX(self.superRect), floorf(CGRectGetMidY(adjustedMainRect)) + 0.5f);
 	CGContextAddLineToPoint(context, CGRectGetMinX(adjustedMainRect), floorf(CGRectGetMidY(adjustedMainRect)) + 0.5f);
 	CGContextStrokePath(context);
-
-	NSString *leftDistanceString = (showAntialiasingWarning) ? [NSString stringWithFormat:@"%.1f", CGRectGetMinX(mainRectOffset)] : [NSString stringWithFormat:@"%.0f", CGRectGetMinX(mainRectOffset)];
+	CGFloat leftDistanceValue = CGRectGetMinX(mainRectOffset);
+	NSString *leftDistanceFormat = (showAntialiasingWarning || (retinaScreen && (leftDistanceValue != floorf(leftDistanceValue)) && fmodf(leftDistanceValue, 0.5) == 0.0)) ? @"%.1f" : @"%.0f";
+	NSString *leftDistanceString = [NSString stringWithFormat:leftDistanceFormat, leftDistanceValue];
 	CGSize leftDistanceStringSize = [leftDistanceString sizeWithFont:font];
 	[leftDistanceString drawInRect:CGRectMake(CGRectGetMinX(self.superRect) + 1.0f,
 											  floorf(CGRectGetMidY(adjustedMainRect)) - leftDistanceStringSize.height,
@@ -130,7 +133,9 @@
 		CGContextAddLineToPoint(context, CGRectGetMaxX(self.superRect), floorf(CGRectGetMidY(adjustedMainRect)) + 0.5f);
 		CGContextStrokePath(context);
 	}
-	NSString *rightDistanceString = (showAntialiasingWarning) ? [NSString stringWithFormat:@"%.1f", CGRectGetMaxX(self.superRect) - CGRectGetMaxX(adjustedMainRect) - 0.5] : [NSString stringWithFormat:@"%.0f", CGRectGetMaxX(self.superRect) - CGRectGetMaxX(adjustedMainRect) - 0.5];
+	CGFloat rightDistanceValue = CGRectGetMaxX(self.superRect) - CGRectGetMaxX(adjustedMainRect) - 0.5;
+	NSString *rightDistanceFormat = (showAntialiasingWarning || (retinaScreen && (rightDistanceValue != floorf(rightDistanceValue)) && fmodf(rightDistanceValue, 0.5) == 0.0)) ? @"%.1f" : @"%.0f";
+	NSString *rightDistanceString = [NSString stringWithFormat:rightDistanceFormat, rightDistanceValue];
 	CGSize rightDistanceStringSize = [rightDistanceString sizeWithFont:font];
 	[rightDistanceString drawInRect:CGRectMake(CGRectGetMaxX(self.superRect) - rightDistanceStringSize.width - 1.0f,
 											   floorf(CGRectGetMidY(adjustedMainRect)) - 0.5f - rightDistanceStringSize.height,
@@ -142,7 +147,9 @@
 	CGContextMoveToPoint(context, floorf(CGRectGetMidX(adjustedMainRect)) + 0.5f, self.superRect.origin.y);
 	CGContextAddLineToPoint(context, floorf(CGRectGetMidX(adjustedMainRect)) + 0.5f, CGRectGetMinY(adjustedMainRect));
 	CGContextStrokePath(context);
-	NSString *topDistanceString = (showAntialiasingWarning) ? [NSString stringWithFormat:@"%.1f",  mainRectOffset.origin.y] : [NSString stringWithFormat:@"%.0f", mainRectOffset.origin.y];
+	CGFloat topDistanceValue = CGRectGetMinY(mainRectOffset);
+	NSString *topDistanceFormat = (showAntialiasingWarning || (retinaScreen && (topDistanceValue != floorf(topDistanceValue)) && fmodf(topDistanceValue, 0.5) == 0.0)) ? @"%.1f" : @"%.0f";
+	NSString *topDistanceString = [NSString stringWithFormat:topDistanceFormat, topDistanceValue];
 	CGSize topDistanceStringSize = [topDistanceString sizeWithFont:font];
 	[topDistanceString drawInRect:CGRectMake(floorf(CGRectGetMidX(adjustedMainRect)) + 3.0f,
 											   floorf(CGRectGetMinY(self.superRect)),
@@ -157,7 +164,9 @@
 		CGContextAddLineToPoint(context, floorf(CGRectGetMidX(adjustedMainRect)) + 0.5f, CGRectGetMaxY(self.superRect));
 		CGContextStrokePath(context);
 	}
-	NSString *bottomDistanceString = (showAntialiasingWarning) ? [NSString stringWithFormat:@"%.1f",  CGRectGetMaxY(self.superRect) - CGRectGetMaxY(mainRectOffset)] : [NSString stringWithFormat:@"%.0f", self.superRect.size.height - mainRectOffset.origin.y - mainRectOffset.size.height];
+	CGFloat bottomDistanceValue = CGRectGetMaxY(self.superRect) - CGRectGetMaxY(mainRectOffset);
+	NSString *bottomDistanceFormat = (showAntialiasingWarning || (retinaScreen && (bottomDistanceValue != floorf(bottomDistanceValue)) && fmodf(bottomDistanceValue, 0.5) == 0.0)) ? @"%.1f" : @"%.0f";
+	NSString *bottomDistanceString = [NSString stringWithFormat:bottomDistanceFormat, bottomDistanceValue];
 	CGSize bottomDistanceStringSize = [bottomDistanceString sizeWithFont:font];
 	[bottomDistanceString drawInRect:CGRectMake(floorf(CGRectGetMidX(adjustedMainRect)) + 3.0f,
 												floorf(CGRectGetMaxY(self.superRect)) - bottomDistanceStringSize.height - 1.0f,
