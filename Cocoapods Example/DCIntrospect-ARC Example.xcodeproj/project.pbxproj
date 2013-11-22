@@ -1,1135 +1,539 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-	<key>archiveVersion</key>
-	<string>1</string>
-	<key>classes</key>
-	<dict/>
-	<key>objectVersion</key>
-	<string>46</string>
-	<key>objects</key>
-	<dict>
-		<key>14329F3B89714CFA899392E0</key>
-		<dict>
-			<key>fileRef</key>
-			<string>492199D5FF9247CCB64EC552</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>22FDD9039A994D83A4356AB6</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>name</key>
-			<string>Pods.xcconfig</string>
-			<key>path</key>
-			<string>Pods/Pods.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>285E64B1ACDC43DE998B319A</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>name</key>
-			<string>Copy Pods Resources</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>"${SRCROOT}/Pods/Pods-resources.sh"
-</string>
-			<key>showEnvVarsInLog</key>
-			<string>0</string>
-		</dict>
-		<key>492199D5FF9247CCB64EC552</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>archive.ar</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>libPods.a</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>80A2D569182B87D400A72E48</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>80A2D57B182B87D400A72E48</string>
-				<string>80A2D59D182B87D500A72E48</string>
-				<string>80A2D574182B87D400A72E48</string>
-				<string>80A2D573182B87D400A72E48</string>
-				<string>22FDD9039A994D83A4356AB6</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>80A2D56A182B87D400A72E48</key>
-		<dict>
-			<key>attributes</key>
-			<dict>
-				<key>CLASSPREFIX</key>
-				<string>DC</string>
-				<key>LastUpgradeCheck</key>
-				<string>0500</string>
-				<key>ORGANIZATIONNAME</key>
-				<string>Lukas Welte</string>
-				<key>TargetAttributes</key>
-				<dict>
-					<key>80A2D595182B87D500A72E48</key>
-					<dict>
-						<key>TestTargetID</key>
-						<string>80A2D571182B87D400A72E48</string>
-					</dict>
-				</dict>
-			</dict>
-			<key>buildConfigurationList</key>
-			<string>80A2D56D182B87D400A72E48</string>
-			<key>compatibilityVersion</key>
-			<string>Xcode 3.2</string>
-			<key>developmentRegion</key>
-			<string>English</string>
-			<key>hasScannedForEncodings</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXProject</string>
-			<key>knownRegions</key>
-			<array>
-				<string>en</string>
-				<string>Base</string>
-			</array>
-			<key>mainGroup</key>
-			<string>80A2D569182B87D400A72E48</string>
-			<key>productRefGroup</key>
-			<string>80A2D573182B87D400A72E48</string>
-			<key>projectDirPath</key>
-			<string></string>
-			<key>projectReferences</key>
-			<array/>
-			<key>projectRoot</key>
-			<string></string>
-			<key>targets</key>
-			<array>
-				<string>80A2D571182B87D400A72E48</string>
-				<string>80A2D595182B87D500A72E48</string>
-			</array>
-		</dict>
-		<key>80A2D56D182B87D400A72E48</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>80A2D5A5182B87D500A72E48</string>
-				<string>80A2D5A6182B87D500A72E48</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>80A2D56E182B87D400A72E48</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>80A2D582182B87D400A72E48</string>
-				<string>80A2D58F182B87D400A72E48</string>
-				<string>80A2D586182B87D400A72E48</string>
-			</array>
-			<key>isa</key>
-			<string>PBXSourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>80A2D56F182B87D400A72E48</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>80A2D578182B87D400A72E48</string>
-				<string>80A2D57A182B87D400A72E48</string>
-				<string>80A2D576182B87D400A72E48</string>
-				<string>14329F3B89714CFA899392E0</string>
-			</array>
-			<key>isa</key>
-			<string>PBXFrameworksBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>80A2D570182B87D400A72E48</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>80A2D58C182B87D400A72E48</string>
-				<string>80A2D591182B87D400A72E48</string>
-				<string>80A2D589182B87D400A72E48</string>
-				<string>80A2D580182B87D400A72E48</string>
-			</array>
-			<key>isa</key>
-			<string>PBXResourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>80A2D571182B87D400A72E48</key>
-		<dict>
-			<key>buildConfigurationList</key>
-			<string>80A2D5A7182B87D500A72E48</string>
-			<key>buildPhases</key>
-			<array>
-				<string>8F45FDED19DC4B9E89C93B00</string>
-				<string>80A2D56E182B87D400A72E48</string>
-				<string>80A2D56F182B87D400A72E48</string>
-				<string>80A2D570182B87D400A72E48</string>
-				<string>285E64B1ACDC43DE998B319A</string>
-			</array>
-			<key>buildRules</key>
-			<array/>
-			<key>dependencies</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXNativeTarget</string>
-			<key>name</key>
-			<string>DCIntrospect-ARC Example</string>
-			<key>productName</key>
-			<string>DCIntrospect-ARC Example</string>
-			<key>productReference</key>
-			<string>80A2D572182B87D400A72E48</string>
-			<key>productType</key>
-			<string>com.apple.product-type.application</string>
-		</dict>
-		<key>80A2D572182B87D400A72E48</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>wrapper.application</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>DCIntrospect-ARC Example.app</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>80A2D573182B87D400A72E48</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>80A2D572182B87D400A72E48</string>
-				<string>80A2D596182B87D500A72E48</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Products</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>80A2D574182B87D400A72E48</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>80A2D575182B87D400A72E48</string>
-				<string>80A2D577182B87D400A72E48</string>
-				<string>80A2D579182B87D400A72E48</string>
-				<string>80A2D597182B87D500A72E48</string>
-				<string>492199D5FF9247CCB64EC552</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Frameworks</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>80A2D575182B87D400A72E48</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>Foundation.framework</string>
-			<key>path</key>
-			<string>System/Library/Frameworks/Foundation.framework</string>
-			<key>sourceTree</key>
-			<string>SDKROOT</string>
-		</dict>
-		<key>80A2D576182B87D400A72E48</key>
-		<dict>
-			<key>fileRef</key>
-			<string>80A2D575182B87D400A72E48</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>80A2D577182B87D400A72E48</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>CoreGraphics.framework</string>
-			<key>path</key>
-			<string>System/Library/Frameworks/CoreGraphics.framework</string>
-			<key>sourceTree</key>
-			<string>SDKROOT</string>
-		</dict>
-		<key>80A2D578182B87D400A72E48</key>
-		<dict>
-			<key>fileRef</key>
-			<string>80A2D577182B87D400A72E48</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>80A2D579182B87D400A72E48</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>UIKit.framework</string>
-			<key>path</key>
-			<string>System/Library/Frameworks/UIKit.framework</string>
-			<key>sourceTree</key>
-			<string>SDKROOT</string>
-		</dict>
-		<key>80A2D57A182B87D400A72E48</key>
-		<dict>
-			<key>fileRef</key>
-			<string>80A2D579182B87D400A72E48</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>80A2D57B182B87D400A72E48</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>80A2D584182B87D400A72E48</string>
-				<string>80A2D585182B87D400A72E48</string>
-				<string>80A2D587182B87D400A72E48</string>
-				<string>80A2D58A182B87D400A72E48</string>
-				<string>80A2D58D182B87D400A72E48</string>
-				<string>80A2D58E182B87D400A72E48</string>
-				<string>80A2D590182B87D400A72E48</string>
-				<string>80A2D57C182B87D400A72E48</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>DCIntrospect-ARC Example</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>80A2D57C182B87D400A72E48</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>80A2D57D182B87D400A72E48</string>
-				<string>80A2D57E182B87D400A72E48</string>
-				<string>80A2D581182B87D400A72E48</string>
-				<string>80A2D583182B87D400A72E48</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Supporting Files</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>80A2D57D182B87D400A72E48</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.xml</string>
-			<key>path</key>
-			<string>DCIntrospect-ARC Example-Info.plist</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>80A2D57E182B87D400A72E48</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>80A2D57F182B87D400A72E48</string>
-			</array>
-			<key>isa</key>
-			<string>PBXVariantGroup</string>
-			<key>name</key>
-			<string>InfoPlist.strings</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>80A2D57F182B87D400A72E48</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.strings</string>
-			<key>name</key>
-			<string>en</string>
-			<key>path</key>
-			<string>en.lproj/InfoPlist.strings</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>80A2D580182B87D400A72E48</key>
-		<dict>
-			<key>fileRef</key>
-			<string>80A2D57E182B87D400A72E48</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>80A2D581182B87D400A72E48</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>main.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>80A2D582182B87D400A72E48</key>
-		<dict>
-			<key>fileRef</key>
-			<string>80A2D581182B87D400A72E48</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>80A2D583182B87D400A72E48</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>DCIntrospect-ARC Example-Prefix.pch</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>80A2D584182B87D400A72E48</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>DCAppDelegate.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>80A2D585182B87D400A72E48</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>DCAppDelegate.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>80A2D586182B87D400A72E48</key>
-		<dict>
-			<key>fileRef</key>
-			<string>80A2D585182B87D400A72E48</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>80A2D587182B87D400A72E48</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>80A2D588182B87D400A72E48</string>
-			</array>
-			<key>isa</key>
-			<string>PBXVariantGroup</string>
-			<key>name</key>
-			<string>Main_iPhone.storyboard</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>80A2D588182B87D400A72E48</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>file.storyboard</string>
-			<key>name</key>
-			<string>Base</string>
-			<key>path</key>
-			<string>Base.lproj/Main_iPhone.storyboard</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>80A2D589182B87D400A72E48</key>
-		<dict>
-			<key>fileRef</key>
-			<string>80A2D587182B87D400A72E48</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>80A2D58A182B87D400A72E48</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>80A2D58B182B87D400A72E48</string>
-			</array>
-			<key>isa</key>
-			<string>PBXVariantGroup</string>
-			<key>name</key>
-			<string>Main_iPad.storyboard</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>80A2D58B182B87D400A72E48</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>file.storyboard</string>
-			<key>name</key>
-			<string>Base</string>
-			<key>path</key>
-			<string>Base.lproj/Main_iPad.storyboard</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>80A2D58C182B87D400A72E48</key>
-		<dict>
-			<key>fileRef</key>
-			<string>80A2D58A182B87D400A72E48</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>80A2D58D182B87D400A72E48</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>DCViewController.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>80A2D58E182B87D400A72E48</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>DCViewController.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>80A2D58F182B87D400A72E48</key>
-		<dict>
-			<key>fileRef</key>
-			<string>80A2D58E182B87D400A72E48</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>80A2D590182B87D400A72E48</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>folder.assetcatalog</string>
-			<key>path</key>
-			<string>Images.xcassets</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>80A2D591182B87D400A72E48</key>
-		<dict>
-			<key>fileRef</key>
-			<string>80A2D590182B87D400A72E48</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>80A2D592182B87D500A72E48</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>80A2D5A4182B87D500A72E48</string>
-			</array>
-			<key>isa</key>
-			<string>PBXSourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>80A2D593182B87D500A72E48</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>80A2D598182B87D500A72E48</string>
-				<string>80A2D59A182B87D500A72E48</string>
-				<string>80A2D599182B87D500A72E48</string>
-			</array>
-			<key>isa</key>
-			<string>PBXFrameworksBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>80A2D594182B87D500A72E48</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>80A2D5A2182B87D500A72E48</string>
-			</array>
-			<key>isa</key>
-			<string>PBXResourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>80A2D595182B87D500A72E48</key>
-		<dict>
-			<key>buildConfigurationList</key>
-			<string>80A2D5AA182B87D500A72E48</string>
-			<key>buildPhases</key>
-			<array>
-				<string>80A2D592182B87D500A72E48</string>
-				<string>80A2D593182B87D500A72E48</string>
-				<string>80A2D594182B87D500A72E48</string>
-			</array>
-			<key>buildRules</key>
-			<array/>
-			<key>dependencies</key>
-			<array>
-				<string>80A2D59C182B87D500A72E48</string>
-			</array>
-			<key>isa</key>
-			<string>PBXNativeTarget</string>
-			<key>name</key>
-			<string>DCIntrospect-ARC ExampleTests</string>
-			<key>productName</key>
-			<string>DCIntrospect-ARC ExampleTests</string>
-			<key>productReference</key>
-			<string>80A2D596182B87D500A72E48</string>
-			<key>productType</key>
-			<string>com.apple.product-type.bundle.unit-test</string>
-		</dict>
-		<key>80A2D596182B87D500A72E48</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>wrapper.cfbundle</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>DCIntrospect-ARC ExampleTests.xctest</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>80A2D597182B87D500A72E48</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>XCTest.framework</string>
-			<key>path</key>
-			<string>Library/Frameworks/XCTest.framework</string>
-			<key>sourceTree</key>
-			<string>DEVELOPER_DIR</string>
-		</dict>
-		<key>80A2D598182B87D500A72E48</key>
-		<dict>
-			<key>fileRef</key>
-			<string>80A2D597182B87D500A72E48</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>80A2D599182B87D500A72E48</key>
-		<dict>
-			<key>fileRef</key>
-			<string>80A2D575182B87D400A72E48</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>80A2D59A182B87D500A72E48</key>
-		<dict>
-			<key>fileRef</key>
-			<string>80A2D579182B87D400A72E48</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>80A2D59B182B87D500A72E48</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>80A2D56A182B87D400A72E48</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>1</string>
-			<key>remoteGlobalIDString</key>
-			<string>80A2D571182B87D400A72E48</string>
-			<key>remoteInfo</key>
-			<string>DCIntrospect-ARC Example</string>
-		</dict>
-		<key>80A2D59C182B87D500A72E48</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXTargetDependency</string>
-			<key>target</key>
-			<string>80A2D571182B87D400A72E48</string>
-			<key>targetProxy</key>
-			<string>80A2D59B182B87D500A72E48</string>
-		</dict>
-		<key>80A2D59D182B87D500A72E48</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>80A2D5A3182B87D500A72E48</string>
-				<string>80A2D59E182B87D500A72E48</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>DCIntrospect-ARC ExampleTests</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>80A2D59E182B87D500A72E48</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>80A2D59F182B87D500A72E48</string>
-				<string>80A2D5A0182B87D500A72E48</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Supporting Files</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>80A2D59F182B87D500A72E48</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.xml</string>
-			<key>path</key>
-			<string>DCIntrospect-ARC ExampleTests-Info.plist</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>80A2D5A0182B87D500A72E48</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>80A2D5A1182B87D500A72E48</string>
-			</array>
-			<key>isa</key>
-			<string>PBXVariantGroup</string>
-			<key>name</key>
-			<string>InfoPlist.strings</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>80A2D5A1182B87D500A72E48</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.strings</string>
-			<key>name</key>
-			<string>en</string>
-			<key>path</key>
-			<string>en.lproj/InfoPlist.strings</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>80A2D5A2182B87D500A72E48</key>
-		<dict>
-			<key>fileRef</key>
-			<string>80A2D5A0182B87D500A72E48</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>80A2D5A3182B87D500A72E48</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>DCIntrospect_ARC_ExampleTests.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>80A2D5A4182B87D500A72E48</key>
-		<dict>
-			<key>fileRef</key>
-			<string>80A2D5A3182B87D500A72E48</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>80A2D5A5182B87D500A72E48</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_SEARCH_USER_PATHS</key>
-				<string>NO</string>
-				<key>ARCHS</key>
-				<string>$(ARCHS_STANDARD_INCLUDING_64_BIT)</string>
-				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
-				<string>gnu++0x</string>
-				<key>CLANG_CXX_LIBRARY</key>
-				<string>libc++</string>
-				<key>CLANG_ENABLE_MODULES</key>
-				<string>YES</string>
-				<key>CLANG_ENABLE_OBJC_ARC</key>
-				<string>YES</string>
-				<key>CLANG_WARN_BOOL_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
-				<string>YES_ERROR</string>
-				<key>CLANG_WARN_EMPTY_BODY</key>
-				<string>YES</string>
-				<key>CLANG_WARN_ENUM_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_INT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
-				<string>YES_ERROR</string>
-				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
-				<string>YES</string>
-				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
-				<string>iPhone Developer</string>
-				<key>COPY_PHASE_STRIP</key>
-				<string>NO</string>
-				<key>GCC_C_LANGUAGE_STANDARD</key>
-				<string>gnu99</string>
-				<key>GCC_DYNAMIC_NO_PIC</key>
-				<string>NO</string>
-				<key>GCC_OPTIMIZATION_LEVEL</key>
-				<string>0</string>
-				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
-				<array>
-					<string>DEBUG=1</string>
-					<string>$(inherited)</string>
-				</array>
-				<key>GCC_SYMBOLS_PRIVATE_EXTERN</key>
-				<string>NO</string>
-				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
-				<string>YES</string>
-				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
-				<string>YES_ERROR</string>
-				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNUSED_FUNCTION</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNUSED_VARIABLE</key>
-				<string>YES</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>7.0</string>
-				<key>ONLY_ACTIVE_ARCH</key>
-				<string>YES</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>TARGETED_DEVICE_FAMILY</key>
-				<string>1,2</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>80A2D5A6182B87D500A72E48</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_SEARCH_USER_PATHS</key>
-				<string>NO</string>
-				<key>ARCHS</key>
-				<string>$(ARCHS_STANDARD_INCLUDING_64_BIT)</string>
-				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
-				<string>gnu++0x</string>
-				<key>CLANG_CXX_LIBRARY</key>
-				<string>libc++</string>
-				<key>CLANG_ENABLE_MODULES</key>
-				<string>YES</string>
-				<key>CLANG_ENABLE_OBJC_ARC</key>
-				<string>YES</string>
-				<key>CLANG_WARN_BOOL_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
-				<string>YES_ERROR</string>
-				<key>CLANG_WARN_EMPTY_BODY</key>
-				<string>YES</string>
-				<key>CLANG_WARN_ENUM_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_INT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
-				<string>YES_ERROR</string>
-				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
-				<string>YES</string>
-				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
-				<string>iPhone Developer</string>
-				<key>COPY_PHASE_STRIP</key>
-				<string>YES</string>
-				<key>ENABLE_NS_ASSERTIONS</key>
-				<string>NO</string>
-				<key>GCC_C_LANGUAGE_STANDARD</key>
-				<string>gnu99</string>
-				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
-				<string>YES</string>
-				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
-				<string>YES_ERROR</string>
-				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNUSED_FUNCTION</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNUSED_VARIABLE</key>
-				<string>YES</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>7.0</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>TARGETED_DEVICE_FAMILY</key>
-				<string>1,2</string>
-				<key>VALIDATE_PRODUCT</key>
-				<string>YES</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>80A2D5A7182B87D500A72E48</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>80A2D5A8182B87D500A72E48</string>
-				<string>80A2D5A9182B87D500A72E48</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>80A2D5A8182B87D500A72E48</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>22FDD9039A994D83A4356AB6</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ARCHS</key>
-				<string>$(ARCHS_STANDARD)</string>
-				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
-				<string>AppIcon</string>
-				<key>ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME</key>
-				<string>LaunchImage</string>
-				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
-				<string>YES</string>
-				<key>GCC_PREFIX_HEADER</key>
-				<string>DCIntrospect-ARC Example/DCIntrospect-ARC Example-Prefix.pch</string>
-				<key>INFOPLIST_FILE</key>
-				<string>DCIntrospect-ARC Example/DCIntrospect-ARC Example-Info.plist</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>5.0</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>WRAPPER_EXTENSION</key>
-				<string>app</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>80A2D5A9182B87D500A72E48</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>22FDD9039A994D83A4356AB6</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ARCHS</key>
-				<string>$(ARCHS_STANDARD)</string>
-				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
-				<string>AppIcon</string>
-				<key>ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME</key>
-				<string>LaunchImage</string>
-				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
-				<string>YES</string>
-				<key>GCC_PREFIX_HEADER</key>
-				<string>DCIntrospect-ARC Example/DCIntrospect-ARC Example-Prefix.pch</string>
-				<key>INFOPLIST_FILE</key>
-				<string>DCIntrospect-ARC Example/DCIntrospect-ARC Example-Info.plist</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>5.0</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>WRAPPER_EXTENSION</key>
-				<string>app</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>80A2D5AA182B87D500A72E48</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>80A2D5AB182B87D500A72E48</string>
-				<string>80A2D5AC182B87D500A72E48</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>80A2D5AB182B87D500A72E48</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>ARCHS</key>
-				<string>$(ARCHS_STANDARD_INCLUDING_64_BIT)</string>
-				<key>BUNDLE_LOADER</key>
-				<string>$(BUILT_PRODUCTS_DIR)/DCIntrospect-ARC Example.app/DCIntrospect-ARC Example</string>
-				<key>FRAMEWORK_SEARCH_PATHS</key>
-				<array>
-					<string>$(SDKROOT)/Developer/Library/Frameworks</string>
-					<string>$(inherited)</string>
-					<string>$(DEVELOPER_FRAMEWORKS_DIR)</string>
-				</array>
-				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
-				<string>YES</string>
-				<key>GCC_PREFIX_HEADER</key>
-				<string>DCIntrospect-ARC Example/DCIntrospect-ARC Example-Prefix.pch</string>
-				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
-				<array>
-					<string>DEBUG=1</string>
-					<string>$(inherited)</string>
-				</array>
-				<key>INFOPLIST_FILE</key>
-				<string>DCIntrospect-ARC ExampleTests/DCIntrospect-ARC ExampleTests-Info.plist</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>TEST_HOST</key>
-				<string>$(BUNDLE_LOADER)</string>
-				<key>WRAPPER_EXTENSION</key>
-				<string>xctest</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>80A2D5AC182B87D500A72E48</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>ARCHS</key>
-				<string>$(ARCHS_STANDARD_INCLUDING_64_BIT)</string>
-				<key>BUNDLE_LOADER</key>
-				<string>$(BUILT_PRODUCTS_DIR)/DCIntrospect-ARC Example.app/DCIntrospect-ARC Example</string>
-				<key>FRAMEWORK_SEARCH_PATHS</key>
-				<array>
-					<string>$(SDKROOT)/Developer/Library/Frameworks</string>
-					<string>$(inherited)</string>
-					<string>$(DEVELOPER_FRAMEWORKS_DIR)</string>
-				</array>
-				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
-				<string>YES</string>
-				<key>GCC_PREFIX_HEADER</key>
-				<string>DCIntrospect-ARC Example/DCIntrospect-ARC Example-Prefix.pch</string>
-				<key>INFOPLIST_FILE</key>
-				<string>DCIntrospect-ARC ExampleTests/DCIntrospect-ARC ExampleTests-Info.plist</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>TEST_HOST</key>
-				<string>$(BUNDLE_LOADER)</string>
-				<key>WRAPPER_EXTENSION</key>
-				<string>xctest</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>8F45FDED19DC4B9E89C93B00</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>name</key>
-			<string>Check Pods Manifest.lock</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>diff "${PODS_ROOT}/../Podfile.lock" "${PODS_ROOT}/Manifest.lock" &gt; /dev/null
-if [[ $? != 0 ]] ; then
-    cat &lt;&lt; EOM
-error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.
-EOM
-    exit 1
-fi
-</string>
-			<key>showEnvVarsInLog</key>
-			<string>0</string>
-		</dict>
-	</dict>
-	<key>rootObject</key>
-	<string>80A2D56A182B87D400A72E48</string>
-</dict>
-</plist>
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		14329F3B89714CFA899392E0 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 492199D5FF9247CCB64EC552 /* libPods.a */; };
+		808A154F182C08A400FB3193 /* CocoapodExampleTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 808A154E182C08A400FB3193 /* CocoapodExampleTest.m */; };
+		80A2D576182B87D400A72E48 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80A2D575182B87D400A72E48 /* Foundation.framework */; };
+		80A2D578182B87D400A72E48 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80A2D577182B87D400A72E48 /* CoreGraphics.framework */; };
+		80A2D57A182B87D400A72E48 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80A2D579182B87D400A72E48 /* UIKit.framework */; };
+		80A2D580182B87D400A72E48 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 80A2D57E182B87D400A72E48 /* InfoPlist.strings */; };
+		80A2D582182B87D400A72E48 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 80A2D581182B87D400A72E48 /* main.m */; };
+		80A2D586182B87D400A72E48 /* DCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 80A2D585182B87D400A72E48 /* DCAppDelegate.m */; };
+		80A2D589182B87D400A72E48 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 80A2D587182B87D400A72E48 /* Main_iPhone.storyboard */; };
+		80A2D58C182B87D400A72E48 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 80A2D58A182B87D400A72E48 /* Main_iPad.storyboard */; };
+		80A2D58F182B87D400A72E48 /* DCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 80A2D58E182B87D400A72E48 /* DCViewController.m */; };
+		80A2D591182B87D400A72E48 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 80A2D590182B87D400A72E48 /* Images.xcassets */; };
+		80A2D598182B87D500A72E48 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80A2D597182B87D500A72E48 /* XCTest.framework */; };
+		80A2D599182B87D500A72E48 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80A2D575182B87D400A72E48 /* Foundation.framework */; };
+		80A2D59A182B87D500A72E48 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80A2D579182B87D400A72E48 /* UIKit.framework */; };
+		80A2D5A2182B87D500A72E48 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 80A2D5A0182B87D500A72E48 /* InfoPlist.strings */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		80A2D59B182B87D500A72E48 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 80A2D56A182B87D400A72E48 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 80A2D571182B87D400A72E48;
+			remoteInfo = "DCIntrospect-ARC Example";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		22FDD9039A994D83A4356AB6 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		492199D5FF9247CCB64EC552 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		808A154E182C08A400FB3193 /* CocoapodExampleTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CocoapodExampleTest.m; sourceTree = "<group>"; };
+		80A2D572182B87D400A72E48 /* DCIntrospect-ARC Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DCIntrospect-ARC Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		80A2D575182B87D400A72E48 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		80A2D577182B87D400A72E48 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		80A2D579182B87D400A72E48 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		80A2D57D182B87D400A72E48 /* DCIntrospect-ARC Example-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DCIntrospect-ARC Example-Info.plist"; sourceTree = "<group>"; };
+		80A2D57F182B87D400A72E48 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		80A2D581182B87D400A72E48 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		80A2D583182B87D400A72E48 /* DCIntrospect-ARC Example-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DCIntrospect-ARC Example-Prefix.pch"; sourceTree = "<group>"; };
+		80A2D584182B87D400A72E48 /* DCAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DCAppDelegate.h; sourceTree = "<group>"; };
+		80A2D585182B87D400A72E48 /* DCAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DCAppDelegate.m; sourceTree = "<group>"; };
+		80A2D588182B87D400A72E48 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
+		80A2D58B182B87D400A72E48 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
+		80A2D58D182B87D400A72E48 /* DCViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DCViewController.h; sourceTree = "<group>"; };
+		80A2D58E182B87D400A72E48 /* DCViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DCViewController.m; sourceTree = "<group>"; };
+		80A2D590182B87D400A72E48 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		80A2D596182B87D500A72E48 /* DCIntrospect-ARC ExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "DCIntrospect-ARC ExampleTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		80A2D597182B87D500A72E48 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		80A2D59F182B87D500A72E48 /* DCIntrospect-ARC ExampleTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DCIntrospect-ARC ExampleTests-Info.plist"; sourceTree = "<group>"; };
+		80A2D5A1182B87D500A72E48 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		80A2D56F182B87D400A72E48 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				80A2D578182B87D400A72E48 /* CoreGraphics.framework in Frameworks */,
+				80A2D57A182B87D400A72E48 /* UIKit.framework in Frameworks */,
+				80A2D576182B87D400A72E48 /* Foundation.framework in Frameworks */,
+				14329F3B89714CFA899392E0 /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		80A2D593182B87D500A72E48 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				80A2D598182B87D500A72E48 /* XCTest.framework in Frameworks */,
+				80A2D59A182B87D500A72E48 /* UIKit.framework in Frameworks */,
+				80A2D599182B87D500A72E48 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		80A2D569182B87D400A72E48 = {
+			isa = PBXGroup;
+			children = (
+				80A2D57B182B87D400A72E48 /* DCIntrospect-ARC Example */,
+				80A2D59D182B87D500A72E48 /* DCIntrospect-ARC ExampleTests */,
+				80A2D574182B87D400A72E48 /* Frameworks */,
+				80A2D573182B87D400A72E48 /* Products */,
+				22FDD9039A994D83A4356AB6 /* Pods.xcconfig */,
+			);
+			sourceTree = "<group>";
+		};
+		80A2D573182B87D400A72E48 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				80A2D572182B87D400A72E48 /* DCIntrospect-ARC Example.app */,
+				80A2D596182B87D500A72E48 /* DCIntrospect-ARC ExampleTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		80A2D574182B87D400A72E48 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				80A2D575182B87D400A72E48 /* Foundation.framework */,
+				80A2D577182B87D400A72E48 /* CoreGraphics.framework */,
+				80A2D579182B87D400A72E48 /* UIKit.framework */,
+				80A2D597182B87D500A72E48 /* XCTest.framework */,
+				492199D5FF9247CCB64EC552 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		80A2D57B182B87D400A72E48 /* DCIntrospect-ARC Example */ = {
+			isa = PBXGroup;
+			children = (
+				80A2D584182B87D400A72E48 /* DCAppDelegate.h */,
+				80A2D585182B87D400A72E48 /* DCAppDelegate.m */,
+				80A2D587182B87D400A72E48 /* Main_iPhone.storyboard */,
+				80A2D58A182B87D400A72E48 /* Main_iPad.storyboard */,
+				80A2D58D182B87D400A72E48 /* DCViewController.h */,
+				80A2D58E182B87D400A72E48 /* DCViewController.m */,
+				80A2D590182B87D400A72E48 /* Images.xcassets */,
+				80A2D57C182B87D400A72E48 /* Supporting Files */,
+			);
+			path = "DCIntrospect-ARC Example";
+			sourceTree = "<group>";
+		};
+		80A2D57C182B87D400A72E48 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				80A2D57D182B87D400A72E48 /* DCIntrospect-ARC Example-Info.plist */,
+				80A2D57E182B87D400A72E48 /* InfoPlist.strings */,
+				80A2D581182B87D400A72E48 /* main.m */,
+				80A2D583182B87D400A72E48 /* DCIntrospect-ARC Example-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		80A2D59D182B87D500A72E48 /* DCIntrospect-ARC ExampleTests */ = {
+			isa = PBXGroup;
+			children = (
+				808A154E182C08A400FB3193 /* CocoapodExampleTest.m */,
+				80A2D59E182B87D500A72E48 /* Supporting Files */,
+			);
+			path = "DCIntrospect-ARC ExampleTests";
+			sourceTree = "<group>";
+		};
+		80A2D59E182B87D500A72E48 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				80A2D59F182B87D500A72E48 /* DCIntrospect-ARC ExampleTests-Info.plist */,
+				80A2D5A0182B87D500A72E48 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		80A2D571182B87D400A72E48 /* DCIntrospect-ARC Example */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 80A2D5A7182B87D500A72E48 /* Build configuration list for PBXNativeTarget "DCIntrospect-ARC Example" */;
+			buildPhases = (
+				8F45FDED19DC4B9E89C93B00 /* Check Pods Manifest.lock */,
+				80A2D56E182B87D400A72E48 /* Sources */,
+				80A2D56F182B87D400A72E48 /* Frameworks */,
+				80A2D570182B87D400A72E48 /* Resources */,
+				285E64B1ACDC43DE998B319A /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "DCIntrospect-ARC Example";
+			productName = "DCIntrospect-ARC Example";
+			productReference = 80A2D572182B87D400A72E48 /* DCIntrospect-ARC Example.app */;
+			productType = "com.apple.product-type.application";
+		};
+		80A2D595182B87D500A72E48 /* DCIntrospect-ARC ExampleTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 80A2D5AA182B87D500A72E48 /* Build configuration list for PBXNativeTarget "DCIntrospect-ARC ExampleTests" */;
+			buildPhases = (
+				80A2D592182B87D500A72E48 /* Sources */,
+				80A2D593182B87D500A72E48 /* Frameworks */,
+				80A2D594182B87D500A72E48 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				80A2D59C182B87D500A72E48 /* PBXTargetDependency */,
+			);
+			name = "DCIntrospect-ARC ExampleTests";
+			productName = "DCIntrospect-ARC ExampleTests";
+			productReference = 80A2D596182B87D500A72E48 /* DCIntrospect-ARC ExampleTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		80A2D56A182B87D400A72E48 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = DC;
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "Lukas Welte";
+				TargetAttributes = {
+					80A2D595182B87D500A72E48 = {
+						TestTargetID = 80A2D571182B87D400A72E48;
+					};
+				};
+			};
+			buildConfigurationList = 80A2D56D182B87D400A72E48 /* Build configuration list for PBXProject "DCIntrospect-ARC Example" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 80A2D569182B87D400A72E48;
+			productRefGroup = 80A2D573182B87D400A72E48 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				80A2D571182B87D400A72E48 /* DCIntrospect-ARC Example */,
+				80A2D595182B87D500A72E48 /* DCIntrospect-ARC ExampleTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		80A2D570182B87D400A72E48 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				80A2D58C182B87D400A72E48 /* Main_iPad.storyboard in Resources */,
+				80A2D591182B87D400A72E48 /* Images.xcassets in Resources */,
+				80A2D589182B87D400A72E48 /* Main_iPhone.storyboard in Resources */,
+				80A2D580182B87D400A72E48 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		80A2D594182B87D500A72E48 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				80A2D5A2182B87D500A72E48 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		285E64B1ACDC43DE998B319A /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8F45FDED19DC4B9E89C93B00 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		80A2D56E182B87D400A72E48 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				80A2D582182B87D400A72E48 /* main.m in Sources */,
+				80A2D58F182B87D400A72E48 /* DCViewController.m in Sources */,
+				80A2D586182B87D400A72E48 /* DCAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		80A2D592182B87D500A72E48 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				808A154F182C08A400FB3193 /* CocoapodExampleTest.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		80A2D59C182B87D500A72E48 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 80A2D571182B87D400A72E48 /* DCIntrospect-ARC Example */;
+			targetProxy = 80A2D59B182B87D500A72E48 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		80A2D57E182B87D400A72E48 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				80A2D57F182B87D400A72E48 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		80A2D587182B87D400A72E48 /* Main_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				80A2D588182B87D400A72E48 /* Base */,
+			);
+			name = Main_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		80A2D58A182B87D400A72E48 /* Main_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				80A2D58B182B87D400A72E48 /* Base */,
+			);
+			name = Main_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		80A2D5A0182B87D500A72E48 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				80A2D5A1182B87D500A72E48 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		80A2D5A5182B87D500A72E48 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		80A2D5A6182B87D500A72E48 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		80A2D5A8182B87D500A72E48 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 22FDD9039A994D83A4356AB6 /* Pods.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DCIntrospect-ARC Example/DCIntrospect-ARC Example-Prefix.pch";
+				INFOPLIST_FILE = "DCIntrospect-ARC Example/DCIntrospect-ARC Example-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		80A2D5A9182B87D500A72E48 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 22FDD9039A994D83A4356AB6 /* Pods.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DCIntrospect-ARC Example/DCIntrospect-ARC Example-Prefix.pch";
+				INFOPLIST_FILE = "DCIntrospect-ARC Example/DCIntrospect-ARC Example-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		80A2D5AB182B87D500A72E48 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/DCIntrospect-ARC Example.app/DCIntrospect-ARC Example";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DCIntrospect-ARC Example/DCIntrospect-ARC Example-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "DCIntrospect-ARC ExampleTests/DCIntrospect-ARC ExampleTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		80A2D5AC182B87D500A72E48 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/DCIntrospect-ARC Example.app/DCIntrospect-ARC Example";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DCIntrospect-ARC Example/DCIntrospect-ARC Example-Prefix.pch";
+				INFOPLIST_FILE = "DCIntrospect-ARC ExampleTests/DCIntrospect-ARC ExampleTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		80A2D56D182B87D400A72E48 /* Build configuration list for PBXProject "DCIntrospect-ARC Example" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				80A2D5A5182B87D500A72E48 /* Debug */,
+				80A2D5A6182B87D500A72E48 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		80A2D5A7182B87D500A72E48 /* Build configuration list for PBXNativeTarget "DCIntrospect-ARC Example" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				80A2D5A8182B87D500A72E48 /* Debug */,
+				80A2D5A9182B87D500A72E48 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		80A2D5AA182B87D500A72E48 /* Build configuration list for PBXNativeTarget "DCIntrospect-ARC ExampleTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				80A2D5AB182B87D500A72E48 /* Debug */,
+				80A2D5AC182B87D500A72E48 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 80A2D56A182B87D400A72E48 /* Project object */;
+}

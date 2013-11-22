@@ -1,12 +1,14 @@
 //
-//  Example - ExampleTest.m
+//  DCIntrospect-ARC Example - CocoapodExampleTest.m
 //  Copyright 2013 Lukas Welte. All rights reserved.
 //
 //  Created by: Lukas Welte
 //
 
-    // Collaborators
+    // Class under test
 #import "DCViewController.h"
+
+    // Collaborators
 
     // Test support
 #import <XCTest/XCTest.h>
@@ -20,10 +22,10 @@
 //#import <OCMockito/OCMockito.h>
 
 
-@interface ExampleTest : XCTestCase
+@interface CocoapodExampleTest : XCTestCase
 @end
 
-@implementation ExampleTest
+@implementation CocoapodExampleTest
 {
     // test fixture ivars go here
     DCViewController *vc;

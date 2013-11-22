@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface DCViewController : UIViewController
-
+@property (weak, nonatomic) IBOutlet UILabel *pressSpaceToStartLabel;
 @end
