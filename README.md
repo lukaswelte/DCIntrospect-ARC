@@ -96,3 +96,5 @@ Collaboration
 -------------
 
 If you have any feature requests/bugfixes etc. feel free to help out and send a pull request, or create a new issue.
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/logicreative/dcintrospect-arc/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
