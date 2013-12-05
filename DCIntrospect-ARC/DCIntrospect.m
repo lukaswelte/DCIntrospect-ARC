@@ -1925,7 +1925,8 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 BOOL iOS7OrHigher() {
     NSString *osVersion = @"7.0";
     NSString *currOsVersion = [[UIDevice currentDevice] systemVersion];
-    return [currOsVersion compare:osVersion options:NSNumericSearch] == NSOrderedDescending;
+    NSComparisonResult compareResult =  [currOsVersion compare:osVersion options:NSNumericSearch];
+    return compareResult == NSOrderedDescending || compareResult == NSOrderedSame;
 }
 
 @end
