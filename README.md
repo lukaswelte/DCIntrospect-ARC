@@ -1,8 +1,8 @@
 #DCIntrospect-ARC 
 
-[![Build Status](https://travis-ci.org/logicreative/DCIntrospect-ARC.png?branch=master)](https://travis-ci.org/logicreative/DCIntrospect-ARC)
+[![Build Status](https://travis-ci.org/lukaswelte/DCIntrospect-ARC.png?branch=master)](https://travis-ci.org/lukaswelte/DCIntrospect-ARC)
 
-Twitter: [@l0gicreative](http://twitter.com/l0gicreative)  
+Twitter: [@lukaswelte](http://twitter.com/lukaswelte)  
 Website: http://lukaswelte.de  
 
 [DCIntrospect](https://github.com/domesticcatsoftware/DCIntrospect) was originally done by [domesticcat](http://domesticcat.com.au) and is small set of tools for iOS that aid in debugging user interfaces built with UIKit.  It's especially useful for UI layouts that are dynamically created or can change during runtime, or for tuning performance by finding non-opaque views or views that are re-drawing unnecessarily.  It's designed for use in the iPhone simulator, but can also be used on a device.
@@ -97,4 +97,4 @@ Collaboration
 
 If you have any feature requests/bugfixes etc. feel free to help out and send a pull request, or create a new issue.
 
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/logicreative/dcintrospect-arc/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/lukaswelte/dcintrospect-arc/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
