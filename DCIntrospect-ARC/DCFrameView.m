@@ -164,7 +164,7 @@
 		CGContextAddLineToPoint(context, floorf(CGRectGetMidX(adjustedMainRect)) + 0.5f, CGRectGetMaxY(self.superRect));
 		CGContextStrokePath(context);
 	}
-	CGFloat bottomDistanceValue = CGRectGetMaxY(self.superRect) - CGRectGetMaxY(mainRectOffset);
+	CGFloat bottomDistanceValue = self.superRect.size.height - CGRectGetMaxY(mainRectOffset);
 	NSString *bottomDistanceFormat = (showAntialiasingWarning || (retinaScreen && (bottomDistanceValue != floorf(bottomDistanceValue)) && fmodf(bottomDistanceValue, 0.5) == 0.0)) ? @"%.1f" : @"%.0f";
 	NSString *bottomDistanceString = [NSString stringWithFormat:bottomDistanceFormat, bottomDistanceValue];
 	CGSize bottomDistanceStringSize = [bottomDistanceString sizeWithFont:font];

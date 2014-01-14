@@ -10,4 +10,6 @@
 
 @interface DCViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UILabel *pressSpaceToStartLabel;
+
 @end

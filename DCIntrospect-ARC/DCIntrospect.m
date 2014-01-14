@@ -131,26 +131,43 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 // See http://stackoverflow.com/questions/6617472/why-does-valueforkey-on-a-uitextfield-throws-an-exception-for-uitextinputtraits
 + (void)workaroundUITextInputTraitsPropertiesBug
 {
-	Method valueForKey = class_getInstanceMethod([NSObject class], @selector(valueForKey:));
-	const char *valueForKeyTypeEncoding = method_getTypeEncoding(valueForKey);
 	
 	unsigned int count = 0;
 	Class *classes = objc_copyClassList(&count);
+    NSMutableSet *visitedClasses = [[NSMutableSet alloc] initWithCapacity:count];
 	for (unsigned int i = 0; i < count; i++)
 	{
 		Class class = classes[i];
-		if (class_getInstanceMethod(class, NSSelectorFromString(@"textInputTraits")))
-		{
-			IMP originalValueForKey = class_replaceMethod(class, @selector(valueForKey:), (IMP)UITextInputTraits_valueForKey, valueForKeyTypeEncoding);
-			if (!originalValueForKey)
-				originalValueForKey = (IMP)[objc_getAssociatedObject([class superclass], originalValueForKeyIMPKey) pointerValue];
-			if (!originalValueForKey)
-				originalValueForKey = class_getMethodImplementation([class superclass], @selector(valueForKey:));
-			
-			objc_setAssociatedObject(class, originalValueForKeyIMPKey, [NSValue valueWithPointer:(void *)originalValueForKey], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-		}
+        [self visitClassForWorkaroundUITextInputTraitsPropertiesBug:class visited:visitedClasses];
 	}
 	free(classes);
+}
+
++ (void)visitClassForWorkaroundUITextInputTraitsPropertiesBug:(Class) class visited:(NSMutableSet*) visited {
+    NSString *className = NSStringFromClass(class);
+    if (![visited containsObject:className]) {
+        [visited addObject:className];
+        Method valueForKey = class_getInstanceMethod([NSObject class], @selector(valueForKey:));
+        const char *valueForKeyTypeEncoding = method_getTypeEncoding(valueForKey);
+        if (class_getInstanceMethod(class, NSSelectorFromString(@"textInputTraits")))
+        {
+            Class superclass = [class superclass];
+            if (superclass) {
+                [self visitClassForWorkaroundUITextInputTraitsPropertiesBug:superclass visited:visited];
+            }
+            IMP originalValueForKey = nil;
+            if (!class_addMethod(class, @selector(valueForKey:), (IMP)UITextInputTraits_valueForKey, valueForKeyTypeEncoding)) {
+                originalValueForKey = class_replaceMethod(class, @selector(valueForKey:), (IMP)UITextInputTraits_valueForKey, valueForKeyTypeEncoding);
+            }
+            if (!originalValueForKey) {
+                originalValueForKey = (IMP)[objc_getAssociatedObject(superclass, originalValueForKeyIMPKey) pointerValue];
+            }
+            if (!originalValueForKey) {
+                originalValueForKey = class_getMethodImplementation(superclass, @selector(valueForKey:));
+            }
+            objc_setAssociatedObject(class, originalValueForKeyIMPKey, [NSValue valueWithPointer:(void *)originalValueForKey], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        }
+    }
 }
 
 + (DCIntrospect *)sharedIntrospector
@@ -1914,7 +1931,8 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 BOOL iOS7OrHigher() {
     NSString *osVersion = @"7.0";
     NSString *currOsVersion = [[UIDevice currentDevice] systemVersion];
-    return [currOsVersion compare:osVersion options:NSNumericSearch] == NSOrderedDescending;
+    NSComparisonResult compareResult =  [currOsVersion compare:osVersion options:NSNumericSearch];
+    return compareResult == NSOrderedDescending || compareResult == NSOrderedSame;
 }
 
 @end
