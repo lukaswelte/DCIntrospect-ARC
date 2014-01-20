@@ -301,10 +301,9 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 
 - (void)invokeIntrospector
 {
-	self.on = !self.on;
-	
-	if (self.on)
+	if (!self.on)
 	{
+        self.on = YES;
 		[self updateViews];
 		[self updateStatusBar];
 		[self updateFrameView];
@@ -332,6 +331,8 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 		self.frameView.alpha = 0;
 		self.currentView = nil;
 		
+        self.on = NO;
+        
 		[[NSNotificationCenter defaultCenter] postNotificationName:kDCIntrospectNotificationIntrospectionDidEnd
 															object:nil];
 	}
