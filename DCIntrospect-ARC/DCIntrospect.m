@@ -171,7 +171,7 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 + (DCIntrospect *)sharedIntrospector
 {
 	static DCIntrospect *sharedInstance = nil;
-#ifdef DEBUG
+#ifdef TARGET_IPHONE_SIMULATOR
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
 		sharedInstance = [[DCIntrospect alloc] init];
@@ -301,10 +301,9 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 
 - (void)invokeIntrospector
 {
-	self.on = !self.on;
-	
-	if (self.on)
+	if (!self.on)
 	{
+        self.on = YES;
 		[self updateViews];
 		[self updateStatusBar];
 		[self updateFrameView];
@@ -332,6 +331,8 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 		self.frameView.alpha = 0;
 		self.currentView = nil;
 		
+        self.on = NO;
+        
 		[[NSNotificationCenter defaultCenter] postNotificationName:kDCIntrospectNotificationIntrospectionDidEnd
 															object:nil];
 	}
@@ -817,10 +818,7 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 
 - (void)logRecursiveDescriptionForView:(UIView *)view
 {
-#ifdef DEBUG
-	// [UIView recursiveDescription] is a private method.  This should probably be re-written to avoid any potential problems.
-	NSLog(@"DCIntrospect-ARC: %@", [view recursiveDescription]);
-#endif
+	NSLog(@"DCIntrospect-ARC: %@", _recursiveDescription(self.currentView, 0));
 }
 
 - (void)forceSetNeedsDisplay
@@ -1544,6 +1542,23 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 		returnString = [NSString stringWithFormat:@"%@ (incompatible color space)", color];
 	}
 	return returnString;
+}
+
+NSString* _recursiveDescription(id view, NSUInteger depth)
+{
+    NSMutableString* subviewsDescription;
+    subviewsDescription = [NSMutableString string];
+    for (id v in [view subviews]) {
+        [subviewsDescription appendString:_recursiveDescription(v, depth+1)];
+    }
+    
+    NSMutableString* layout;
+    layout = [NSMutableString string];
+    for (int i = 0; i < depth; i++) {
+        [layout appendString:@"   | "];
+    }
+    
+    return [NSString stringWithFormat:@"%@%@\n%@", layout, [view description], subviewsDescription];
 }
 
 #pragma mark DCIntrospector Help
