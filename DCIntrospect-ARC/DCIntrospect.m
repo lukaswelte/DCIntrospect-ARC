@@ -1735,10 +1735,17 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 	
 	[outputString appendFormat:@"  ** %@ properties **\n", objectClass];
 	
-	if (objectClass == UIScrollView.class || objectClass == UIButton.class)
+	if ([objectClass isSubclassOfClass:UIScrollView.class])
 	{
-		[outputString appendString:@"    Logging properties not currently supported for this view.\n"];
+        UIScrollView *view = (UIScrollView *)object;
+		[outputString appendFormat:@"    contentSize  : %@\n", NSStringFromCGSize(view.contentSize)];
+        [outputString appendFormat:@"    contentInset : %@\n", NSStringFromUIEdgeInsets(view.contentInset)];
+        [outputString appendFormat:@"    contentOffset: %@\n", NSStringFromCGPoint(view.contentOffset)];
 	}
+    else if (objectClass == UIButton.class)
+    {
+        [outputString appendString:@"    Logging properties not currently supported for this view.\n"];
+    }
 	else
 	{
 		
