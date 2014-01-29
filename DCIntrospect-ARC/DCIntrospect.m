@@ -345,8 +345,21 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 	
 	// find all the views under that point – will be added in order on screen, ie mainWindow will be index 0, main view controller at index 1 etc, note that hidden views are ignored.
 	NSMutableArray *views = [self viewsAtPoint:convertedTouchPoint inView:[self mainWindow]];
-	while ([views.lastObject isHidden]) {
-		[views removeLastObject];
+	while (views.count > 0) {
+        UIView *view = views.lastObject;
+        BOOL hidden = NO;
+        while (view) {
+            if (view.hidden || view.alpha == 0) {
+                hidden = YES;
+                break;
+            }
+            view = view.superview;
+        }
+        if (hidden) {
+            [views removeLastObject];
+        } else {
+            break;
+        }
 	}
 	if (views.count == 0)
 		return;
