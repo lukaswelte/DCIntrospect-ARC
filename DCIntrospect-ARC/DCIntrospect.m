@@ -806,7 +806,11 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
     [self setKeyboardBindingsOn:NO];
     [[self inputTextView] resignFirstResponder];
     NSLog(@"DCIntrospect-ARC: Disabled for %.1f seconds", kDCIntrospectTemporaryDisableDuration);
-    [self performSelector:@selector(setKeyboardBindingsOn:) withObject:[NSNumber numberWithFloat:YES] afterDelay:kDCIntrospectTemporaryDisableDuration];
+    [self invokeIntrospector];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(kDCIntrospectTemporaryDisableDuration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self setKeyboardBindingsOn:YES];
+    });
 }
 
 - (void)logRecursiveDescriptionForCurrentView
@@ -1613,6 +1617,7 @@ NSString* _recursiveDescription(id view, NSUInteger depth)
 		[helpString appendFormat:@"<div><span class='name'>Toggle Help</span><div class='key'>%@</div></div>", kDCIntrospectKeysToggleHelp];
 		[helpString appendFormat:@"<div><span class='name'>Toggle flash on <span class='code'>drawRect:</span> (see below)</span><div class='key'>%@</div></div>", kDCIntrospectKeysToggleFlashViewRedraws];
 		[helpString appendFormat:@"<div><span class='name'>Toggle coordinates</span><div class='key'>%@</div></div>", kDCIntrospectKeysToggleShowCoordinates];
+		[helpString appendFormat:@"<div><span class='name'>Disable for %g seconds</span><div class='key'>%@</div></div>", kDCIntrospectTemporaryDisableDuration, kDCIntrospectKeysDisableForPeriod];
 		[helpString appendString:@"<div class='spacer'></div>"];
 		
 		[helpString appendString:@"<h2>When a view is selected</h2>"];

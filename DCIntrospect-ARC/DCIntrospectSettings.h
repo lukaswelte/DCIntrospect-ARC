@@ -59,4 +59,4 @@
 #define kDCIntrospectKeysMoveToPrevSiblingView			@"g"
 
 #define kDCIntrospectKeysEnterGDB						@"`"			// enters GDB
-#define kDCIntrospectKeysDisableForPeriod		@"~"			// disables DCIntrospect for a given period (see kDCIntrospectTemporaryDisableDuration)
+#define kDCIntrospectKeysDisableForPeriod		@"."			// disables DCIntrospect for a given period (see kDCIntrospectTemporaryDisableDuration)
