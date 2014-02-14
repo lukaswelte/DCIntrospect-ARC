@@ -55,6 +55,22 @@
 
 #pragma Drawing/Display
 
+- (CGSize)safeSizeOfString:(NSString *)string withFont:(UIFont *)font {
+#if (defined(__IPHONE_OS_VERSION_MIN_REQUIRED) && __IPHONE_OS_VERSION_MIN_REQUIRED < 70000)
+	return [string sizeWithFont:font];
+#else
+    return [string sizeWithAttributes:@{NSFontAttributeName:font}];
+#endif
+}
+
+- (void)safeDrawString:(NSString *)string inRect:(CGRect)rect withFont:(UIFont *)font {
+#if (defined(__IPHONE_OS_VERSION_MIN_REQUIRED) && __IPHONE_OS_VERSION_MIN_REQUIRED < 70000)
+    [string drawInRect:rect withFont:font];
+#else
+    [string drawWithRect:rect options:0 attributes:@{NSFontAttributeName:font} context:nil];
+#endif
+}
+
 - (void)drawRect:(CGRect)rect
 {
 	CGContextRef context = UIGraphicsGetCurrentContext();
@@ -119,12 +135,13 @@
 	CGFloat leftDistanceValue = CGRectGetMinX(mainRectOffset);
 	NSString *leftDistanceFormat = (showAntialiasingWarning || (retinaScreen && (leftDistanceValue != floorf(leftDistanceValue)) && fmodf(leftDistanceValue, 0.5) == 0.0)) ? @"%.1f" : @"%.0f";
 	NSString *leftDistanceString = [NSString stringWithFormat:leftDistanceFormat, leftDistanceValue];
-	CGSize leftDistanceStringSize = [leftDistanceString sizeWithFont:font];
-	[leftDistanceString drawInRect:CGRectMake(CGRectGetMinX(self.superRect) + 1.0f,
-											  floorf(CGRectGetMidY(adjustedMainRect)) - leftDistanceStringSize.height,
-											  leftDistanceStringSize.width,
-											  leftDistanceStringSize.height)
-						  withFont:font];
+	CGSize leftDistanceStringSize = [self safeSizeOfString:leftDistanceString withFont:font];
+	[self safeDrawString:leftDistanceString
+				  inRect:CGRectMake(CGRectGetMinX(self.superRect) + 1.0f,
+									floorf(CGRectGetMidY(adjustedMainRect)) - leftDistanceStringSize.height,
+									leftDistanceStringSize.width,
+									leftDistanceStringSize.height)
+				withFont:font];
 
 	// right side->edge
 	if (CGRectGetMaxX(self.mainRect) < CGRectGetMaxX(self.superRect))
@@ -136,12 +153,13 @@
 	CGFloat rightDistanceValue = CGRectGetMaxX(self.superRect) - CGRectGetMaxX(adjustedMainRect) - 0.5;
 	NSString *rightDistanceFormat = (showAntialiasingWarning || (retinaScreen && (rightDistanceValue != floorf(rightDistanceValue)) && fmodf(rightDistanceValue, 0.5) == 0.0)) ? @"%.1f" : @"%.0f";
 	NSString *rightDistanceString = [NSString stringWithFormat:rightDistanceFormat, rightDistanceValue];
-	CGSize rightDistanceStringSize = [rightDistanceString sizeWithFont:font];
-	[rightDistanceString drawInRect:CGRectMake(CGRectGetMaxX(self.superRect) - rightDistanceStringSize.width - 1.0f,
-											   floorf(CGRectGetMidY(adjustedMainRect)) - 0.5f - rightDistanceStringSize.height,
-											   rightDistanceStringSize.width,
-											   rightDistanceStringSize.height)
-						   withFont:font];
+	CGSize rightDistanceStringSize = [self safeSizeOfString:rightDistanceString withFont:font];
+	[self safeDrawString:rightDistanceString
+				  inRect:CGRectMake(CGRectGetMaxX(self.superRect) - rightDistanceStringSize.width - 1.0f,
+									floorf(CGRectGetMidY(adjustedMainRect)) - 0.5f - rightDistanceStringSize.height,
+									rightDistanceStringSize.width,
+									rightDistanceStringSize.height)
+				withFont:font];
 
 	// edge->top side
 	CGContextMoveToPoint(context, floorf(CGRectGetMidX(adjustedMainRect)) + 0.5f, self.superRect.origin.y);
@@ -150,12 +168,13 @@
 	CGFloat topDistanceValue = CGRectGetMinY(mainRectOffset);
 	NSString *topDistanceFormat = (showAntialiasingWarning || (retinaScreen && (topDistanceValue != floorf(topDistanceValue)) && fmodf(topDistanceValue, 0.5) == 0.0)) ? @"%.1f" : @"%.0f";
 	NSString *topDistanceString = [NSString stringWithFormat:topDistanceFormat, topDistanceValue];
-	CGSize topDistanceStringSize = [topDistanceString sizeWithFont:font];
-	[topDistanceString drawInRect:CGRectMake(floorf(CGRectGetMidX(adjustedMainRect)) + 3.0f,
-											   floorf(CGRectGetMinY(self.superRect)),
-											   topDistanceStringSize.width,
-											   topDistanceStringSize.height)
-						   withFont:font];
+	CGSize topDistanceStringSize = [self safeSizeOfString:topDistanceString withFont:font];
+	[self safeDrawString:topDistanceString
+				  inRect:CGRectMake(floorf(CGRectGetMidX(adjustedMainRect)) + 3.0f,
+									floorf(CGRectGetMinY(self.superRect)),
+									topDistanceStringSize.width,
+									topDistanceStringSize.height)
+				withFont:font];
 
 	// bottom side->edge
 	if (CGRectGetMaxY(self.mainRect) < CGRectGetMaxY(self.superRect))
@@ -164,16 +183,17 @@
 		CGContextAddLineToPoint(context, floorf(CGRectGetMidX(adjustedMainRect)) + 0.5f, CGRectGetMaxY(self.superRect));
 		CGContextStrokePath(context);
 	}
-	CGFloat bottomDistanceValue = self.superRect.size.height - CGRectGetMaxY(mainRectOffset);
+	CGFloat bottomDistanceValue = CGRectGetMaxY(self.superRect) - CGRectGetMaxY(mainRectOffset);
 	NSString *bottomDistanceFormat = (showAntialiasingWarning || (retinaScreen && (bottomDistanceValue != floorf(bottomDistanceValue)) && fmodf(bottomDistanceValue, 0.5) == 0.0)) ? @"%.1f" : @"%.0f";
 	NSString *bottomDistanceString = [NSString stringWithFormat:bottomDistanceFormat, bottomDistanceValue];
-	CGSize bottomDistanceStringSize = [bottomDistanceString sizeWithFont:font];
-	[bottomDistanceString drawInRect:CGRectMake(floorf(CGRectGetMidX(adjustedMainRect)) + 3.0f,
-												floorf(CGRectGetMaxY(self.superRect)) - bottomDistanceStringSize.height - 1.0f,
-												bottomDistanceStringSize.width,
-												bottomDistanceStringSize.height)
-							withFont:font];
-
+	CGSize bottomDistanceStringSize = [self safeSizeOfString:bottomDistanceString withFont:font];
+	 [self safeDrawString:bottomDistanceString
+				   inRect:CGRectMake(floorf(CGRectGetMidX(adjustedMainRect)) + 3.0f,
+									 floorf(CGRectGetMaxY(self.superRect)) - bottomDistanceStringSize.height - 1.0f,
+									 bottomDistanceStringSize.width,
+									 bottomDistanceStringSize.height)
+				 withFont:font];
+	
 }
 
 #pragma Touch Handling
@@ -190,7 +210,7 @@
 	NSString *touchPontLabelString = [NSString stringWithFormat:@"%.0f, %.0f", touchPoint.x, touchPoint.y];
 	self.touchPointLabel.text = touchPontLabelString;
 
-	CGSize stringSize = [touchPontLabelString sizeWithFont:self.touchPointLabel.font];
+	CGSize stringSize = [self safeSizeOfString:touchPontLabelString withFont:self.touchPointLabel.font];
 	CGRect frame = CGRectMake(touchPoint.x - floorf(stringSize.width / 2.0f) - 5.0f,
 							  touchPoint.y - stringSize.height - labelDistance,
 							  stringSize.width + 11.0f,
