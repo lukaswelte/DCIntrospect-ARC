@@ -31,6 +31,18 @@
              [UIKeyCommand keyCommandWithInput:kDCIntrospectKeysIncreaseHeight modifierFlags:0 action:@selector(increaseHeight)],
              [UIKeyCommand keyCommandWithInput:kDCIntrospectKeysDecreaseHeight modifierFlags:0 action:@selector(decreaseHeight)],
              [UIKeyCommand keyCommandWithInput:kDCIntrospectKeysLogCodeForCurrentViewChanges modifierFlags:0 action:@selector(logCodeForCurrentViewChanges)],
+
+             [UIKeyCommand keyCommandWithInput:kDCIntrospectKeysNudgeViewLeft modifierFlags:UIKeyModifierNumericPad action:@selector(nudgeViewLeft)],
+             [UIKeyCommand keyCommandWithInput:kDCIntrospectKeysNudgeViewRight modifierFlags:UIKeyModifierNumericPad action:@selector(nudgeViewRight)],
+             [UIKeyCommand keyCommandWithInput:kDCIntrospectKeysNudgeViewUp modifierFlags:UIKeyModifierNumericPad action:@selector(nudgeViewUp)],
+             [UIKeyCommand keyCommandWithInput:kDCIntrospectKeysNudgeViewDown modifierFlags:UIKeyModifierNumericPad action:@selector(nudgeViewDown)],
+             [UIKeyCommand keyCommandWithInput:kDCIntrospectKeysCenterInSuperview modifierFlags:UIKeyModifierNumericPad action:@selector(centerInSuperview)],
+             [UIKeyCommand keyCommandWithInput:kDCIntrospectKeysIncreaseWidth modifierFlags:UIKeyModifierNumericPad action:@selector(increaseWidth)],
+             [UIKeyCommand keyCommandWithInput:kDCIntrospectKeysDecreaseWidth modifierFlags:UIKeyModifierNumericPad action:@selector(decreaseWidth)],
+             [UIKeyCommand keyCommandWithInput:kDCIntrospectKeysIncreaseHeight modifierFlags:UIKeyModifierNumericPad action:@selector(increaseHeight)],
+             [UIKeyCommand keyCommandWithInput:kDCIntrospectKeysDecreaseHeight modifierFlags:UIKeyModifierNumericPad action:@selector(decreaseHeight)],
+             [UIKeyCommand keyCommandWithInput:kDCIntrospectKeysLogCodeForCurrentViewChanges modifierFlags:UIKeyModifierNumericPad action:@selector(logCodeForCurrentViewChanges)],
+
              [UIKeyCommand keyCommandWithInput:kDCIntrospectKeysIncreaseViewAlpha modifierFlags:0 action:@selector(increaseViewAlpha)],
              [UIKeyCommand keyCommandWithInput:kDCIntrospectKeysDecreaseViewAlpha modifierFlags:0 action:@selector(decreaseViewAlpha)],
              [UIKeyCommand keyCommandWithInput:kDCIntrospectKeysSetNeedsDisplay modifierFlags:0 action:@selector(forceSetNeedsDisplay)],

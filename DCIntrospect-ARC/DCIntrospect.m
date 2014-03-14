@@ -173,7 +173,7 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 + (DCIntrospect *)sharedIntrospector
 {
 	static DCIntrospect *sharedInstance = nil;
-#ifdef DEBUG
+#ifdef TARGET_IPHONE_SIMULATOR
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
 		sharedInstance = [[DCIntrospect alloc] init];
@@ -303,10 +303,9 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 
 - (void)invokeIntrospector
 {
-	self.on = !self.on;
-	
-	if (self.on)
+	if (!self.on)
 	{
+        self.on = YES;
 		[self updateViews];
 		[self updateStatusBar];
 		[self updateFrameView];
@@ -334,6 +333,8 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 		self.frameView.alpha = 0;
 		self.currentView = nil;
 		
+        self.on = NO;
+        
 		[[NSNotificationCenter defaultCenter] postNotificationName:kDCIntrospectNotificationIntrospectionDidEnd
 															object:nil];
 	}
@@ -346,8 +347,21 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 	
 	// find all the views under that point – will be added in order on screen, ie mainWindow will be index 0, main view controller at index 1 etc, note that hidden views are ignored.
 	NSMutableArray *views = [self viewsAtPoint:convertedTouchPoint inView:[self mainWindow]];
-	while ([views.lastObject isHidden]) {
-		[views removeLastObject];
+	while (views.count > 0) {
+        UIView *view = views.lastObject;
+        BOOL hidden = NO;
+        while (view) {
+            if (view.hidden || view.alpha == 0) {
+                hidden = YES;
+                break;
+            }
+            view = view.superview;
+        }
+        if (hidden) {
+            [views removeLastObject];
+        } else {
+            break;
+        }
 	}
 	if (views.count == 0)
 		return;
@@ -807,7 +821,11 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
     [self setKeyboardBindingsOn:NO];
     [[self inputTextView] resignFirstResponder];
     NSLog(@"DCIntrospect-ARC: Disabled for %.1f seconds", kDCIntrospectTemporaryDisableDuration);
-    [self performSelector:@selector(setKeyboardBindingsOn:) withObject:[NSNumber numberWithFloat:YES] afterDelay:kDCIntrospectTemporaryDisableDuration];
+    [self invokeIntrospector];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(kDCIntrospectTemporaryDisableDuration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self setKeyboardBindingsOn:YES];
+    });
 }
 
 - (void)logRecursiveDescriptionForCurrentView
@@ -819,10 +837,7 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 
 - (void)logRecursiveDescriptionForView:(UIView *)view
 {
-#ifdef DEBUG
-	// [UIView recursiveDescription] is a private method.  This should probably be re-written to avoid any potential problems.
-	NSLog(@"DCIntrospect-ARC: %@", [view recursiveDescription]);
-#endif
+	NSLog(@"DCIntrospect-ARC: %@", _recursiveDescription(self.currentView, 0));
 }
 
 - (void)forceSetNeedsDisplay
@@ -1548,6 +1563,23 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 	return returnString;
 }
 
+NSString* _recursiveDescription(id view, NSUInteger depth)
+{
+    NSMutableString* subviewsDescription;
+    subviewsDescription = [NSMutableString string];
+    for (id v in [view subviews]) {
+        [subviewsDescription appendString:_recursiveDescription(v, depth+1)];
+    }
+    
+    NSMutableString* layout;
+    layout = [NSMutableString string];
+    for (int i = 0; i < depth; i++) {
+        [layout appendString:@"   | "];
+    }
+    
+    return [NSString stringWithFormat:@"%@%@\n%@", layout, [view description], subviewsDescription];
+}
+
 #pragma mark DCIntrospector Help
 
 - (void)toggleHelp
@@ -1600,6 +1632,7 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 		[helpString appendFormat:@"<div><span class='name'>Toggle Help</span><div class='key'>%@</div></div>", kDCIntrospectKeysToggleHelp];
 		[helpString appendFormat:@"<div><span class='name'>Toggle flash on <span class='code'>drawRect:</span> (see below)</span><div class='key'>%@</div></div>", kDCIntrospectKeysToggleFlashViewRedraws];
 		[helpString appendFormat:@"<div><span class='name'>Toggle coordinates</span><div class='key'>%@</div></div>", kDCIntrospectKeysToggleShowCoordinates];
+		[helpString appendFormat:@"<div><span class='name'>Disable for %g seconds</span><div class='key'>%@</div></div>", kDCIntrospectTemporaryDisableDuration, kDCIntrospectKeysDisableForPeriod];
 		[helpString appendString:@"<div class='spacer'></div>"];
 		
 		[helpString appendString:@"<h2>When a view is selected</h2>"];
@@ -1721,11 +1754,9 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 		[outputString appendFormat:@"    autoresizingMask: %@\n", [self describeProperty:@"autoresizingMask" value:[NSNumber numberWithInt:view.autoresizingMask]]];
 		[outputString appendFormat:@"    autoresizesSubviews: %@\n", (view.autoresizesSubviews) ? @"YES" : @"NO"];
 		[outputString appendFormat:@"    contentMode: %@ | ", [self describeProperty:@"contentMode" value:[NSNumber numberWithInt:view.contentMode]]];
-        // TODO: Hsoi 2013-08-19 - For now, we'll keep contentStretch in, but eventually we'll need to remove this.
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000 // deprecated in iOS 6.0 or later
 		[outputString appendFormat:@"contentStretch: %@\n", NSStringFromCGRect(view.contentStretch)];
-#pragma GCC diagnostic pop
+#endif
 		[outputString appendFormat:@"    backgroundColor: %@\n", [self describeColor:view.backgroundColor]];
 		[outputString appendFormat:@"    alpha: %.2f | ", view.alpha];
 		[outputString appendFormat:@"opaque: %@ | ", (view.opaque) ? @"YES" : @"NO"];
@@ -1741,10 +1772,17 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 	
 	[outputString appendFormat:@"  ** %@ properties **\n", objectClass];
 	
-	if (objectClass == UIScrollView.class || objectClass == UIButton.class)
+	if ([objectClass isSubclassOfClass:UIScrollView.class])
 	{
-		[outputString appendString:@"    Logging properties not currently supported for this view.\n"];
+        UIScrollView *view = (UIScrollView *)object;
+		[outputString appendFormat:@"    contentSize  : %@\n", NSStringFromCGSize(view.contentSize)];
+        [outputString appendFormat:@"    contentInset : %@\n", NSStringFromUIEdgeInsets(view.contentInset)];
+        [outputString appendFormat:@"    contentOffset: %@\n", NSStringFromCGPoint(view.contentOffset)];
 	}
+    else if (objectClass == UIButton.class)
+    {
+        [outputString appendString:@"    Logging properties not currently supported for this view.\n"];
+    }
 	else
 	{
 		
