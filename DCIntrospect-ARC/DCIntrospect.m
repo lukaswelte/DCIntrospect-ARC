@@ -16,6 +16,8 @@
 #include <sys/sysctl.h>
 
 BOOL iOS7OrHigher(void);
+NSString* _recursiveDescription(id view, NSUInteger depth);
+
 
 #define IS_IOS7_AND_UP ([[UIDevice currentDevice].systemVersion floatValue] >= 7.0)
 
@@ -1573,7 +1575,7 @@ NSString* _recursiveDescription(id view, NSUInteger depth)
     
     NSMutableString* layout;
     layout = [NSMutableString string];
-    for (int i = 0; i < depth; i++) {
+    for (NSUInteger i = 0; i < depth; i++) {
         [layout appendString:@"   | "];
     }
     
