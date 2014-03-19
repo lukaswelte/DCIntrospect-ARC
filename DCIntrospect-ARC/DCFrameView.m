@@ -8,7 +8,7 @@
 
 @implementation DCFrameView
 
-#pragma Setup
+#pragma mark Setup
 
 - (id)initWithFrame:(CGRect)frame delegate:(id)aDelegate
 {
@@ -39,7 +39,7 @@
 	return self;
 }
 
-#pragma Custom Setters
+#pragma mark Custom Setters
 
 - (void)setMainRect:(CGRect)newMainRect
 {
@@ -53,7 +53,7 @@
 	[self setNeedsDisplay];
 }
 
-#pragma Drawing/Display
+#pragma mark Drawing/Display
 
 - (CGSize)safeSizeOfString:(NSString *)string withFont:(UIFont *)font {
 #if (defined(__IPHONE_OS_VERSION_MIN_REQUIRED) && __IPHONE_OS_VERSION_MIN_REQUIRED < 70000)
@@ -196,7 +196,7 @@
 	
 }
 
-#pragma Touch Handling
+#pragma mark Touch Handling
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
