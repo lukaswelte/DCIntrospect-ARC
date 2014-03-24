@@ -175,7 +175,7 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 + (DCIntrospect *)sharedIntrospector
 {
 	static DCIntrospect *sharedInstance = nil;
-#ifdef TARGET_IPHONE_SIMULATOR
+#if TARGET_IPHONE_SIMULATOR
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
 		sharedInstance = [[DCIntrospect alloc] init];
