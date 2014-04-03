@@ -98,80 +98,6 @@ static bool AmIBeingDebugged(void)
 	}
 }
 
-static void *originalValueForKeyIMPKey = &originalValueForKeyIMPKey;
-
-id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key);
-id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
-{
-	static NSMutableSet *textInputTraitsProperties = nil;
-	if (!textInputTraitsProperties)
-	{
-		textInputTraitsProperties = [[NSMutableSet alloc] init];
-		unsigned int count = 0;
-		objc_property_t *properties = protocol_copyPropertyList(@protocol(UITextInputTraits), &count);
-		for (unsigned int i = 0; i < count; i++)
-		{
-			objc_property_t property = properties[i];
-			NSString *propertyName = [NSString stringWithUTF8String:property_getName(property)];
-			[textInputTraitsProperties addObject:propertyName];
-		}
-		free(properties);
-	}
-	
-	IMP valueForKey = (IMP)[objc_getAssociatedObject([self class], originalValueForKeyIMPKey) pointerValue];
-	if ([textInputTraitsProperties containsObject:key])
-	{
-		id textInputTraits = valueForKey(self, _cmd, @"textInputTraits");
-		return valueForKey(textInputTraits, _cmd, key);
-	}
-	else
-	{
-		return valueForKey(self, _cmd, key);
-	}
-}
-
-// See http://stackoverflow.com/questions/6617472/why-does-valueforkey-on-a-uitextfield-throws-an-exception-for-uitextinputtraits
-+ (void)workaroundUITextInputTraitsPropertiesBug
-{
-	
-	unsigned int count = 0;
-	Class *classes = objc_copyClassList(&count);
-    NSMutableSet *visitedClasses = [[NSMutableSet alloc] initWithCapacity:count];
-	for (unsigned int i = 0; i < count; i++)
-	{
-		Class class = classes[i];
-        [self visitClassForWorkaroundUITextInputTraitsPropertiesBug:class visited:visitedClasses];
-	}
-	free(classes);
-}
-
-+ (void)visitClassForWorkaroundUITextInputTraitsPropertiesBug:(Class) class visited:(NSMutableSet*) visited {
-    NSString *className = NSStringFromClass(class);
-    if (![visited containsObject:className]) {
-        [visited addObject:className];
-        Method valueForKey = class_getInstanceMethod([NSObject class], @selector(valueForKey:));
-        const char *valueForKeyTypeEncoding = method_getTypeEncoding(valueForKey);
-        if (class_getInstanceMethod(class, NSSelectorFromString(@"textInputTraits")))
-        {
-            Class superclass = [class superclass];
-            if (superclass) {
-                [self visitClassForWorkaroundUITextInputTraitsPropertiesBug:superclass visited:visited];
-            }
-            IMP originalValueForKey = nil;
-            if (!class_addMethod(class, @selector(valueForKey:), (IMP)UITextInputTraits_valueForKey, valueForKeyTypeEncoding)) {
-                originalValueForKey = class_replaceMethod(class, @selector(valueForKey:), (IMP)UITextInputTraits_valueForKey, valueForKeyTypeEncoding);
-            }
-            if (!originalValueForKey) {
-                originalValueForKey = (IMP)[objc_getAssociatedObject(superclass, originalValueForKeyIMPKey) pointerValue];
-            }
-            if (!originalValueForKey) {
-                originalValueForKey = class_getMethodImplementation(superclass, @selector(valueForKey:));
-            }
-            objc_setAssociatedObject(class, originalValueForKeyIMPKey, [NSValue valueWithPointer:(void *)originalValueForKey], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-        }
-    }
-}
-
 + (DCIntrospect *)sharedIntrospector
 {
 	static DCIntrospect *sharedInstance = nil;
@@ -181,7 +107,6 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 		sharedInstance = [[DCIntrospect alloc] init];
 		sharedInstance.keyboardBindingsOn = YES;
 		sharedInstance.showStatusBarOverlay = ![UIApplication sharedApplication].statusBarHidden;
-		[self workaroundUITextInputTraitsPropertiesBug];
 	});
 #endif
 	return sharedInstance;
@@ -1787,7 +1712,6 @@ NSString* _recursiveDescription(id view, NSUInteger depth)
     }
 	else
 	{
-		
 		for (unsigned int i = 0; i < count; ++i)
 		{
 			// get the property name and selector name
@@ -1812,9 +1736,25 @@ NSString* _recursiveDescription(id view, NSUInteger depth)
 					// Non KVC compliant properties, see also +workaroundUITextInputTraitsPropertiesBug
 					propertyDescription = @"N/A";
 				}
-				[outputString appendFormat:@"    %@: %@\n", propertyName, propertyDescription];
+                if (![propertyDescription isEqualToString:@"N/A"]) {
+                    [outputString appendFormat:@"    %@: %@\n", propertyName, propertyDescription];
+                }
 			}
 		}
+        
+        if ([object conformsToProtocol:@protocol(UITextInputTraits)]) {
+            [outputString appendString:@"\n  ** UITextInputTraits properties **\n"];
+            id<UITextInputTraits> inputTraitObject = object;
+            [outputString appendFormat:@"    autocapitalizationType: %@\n", @([inputTraitObject autocapitalizationType])];
+            [outputString appendFormat:@"    autocorrectionType: %@\n",@([inputTraitObject autocorrectionType])];
+            [outputString appendFormat:@"    spellCheckingType: %@\n",@([inputTraitObject spellCheckingType])];
+            [outputString appendFormat:@"    enablesReturnKeyAutomatically: %@\n",[NSNumber numberWithBool:[inputTraitObject enablesReturnKeyAutomatically]]];
+            [outputString appendFormat:@"    keyboardAppearance: %@\n",@([inputTraitObject keyboardAppearance])];
+            [outputString appendFormat:@"    keyboardType: %@\n",@([inputTraitObject keyboardType])];
+            [outputString appendFormat:@"    returnKeyType: %@\n",@([inputTraitObject returnKeyType])];
+            [outputString appendFormat:@"    secureTextEntry: %@\n\n",[NSNumber numberWithBool:[inputTraitObject isSecureTextEntry]]];
+        }
+        
 	}
 	
 	// list targets if there are any
