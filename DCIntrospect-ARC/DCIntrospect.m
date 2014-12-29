@@ -582,7 +582,15 @@ static bool AmIBeingDebugged(void)
 
 - (NSString *)nameForObject:(id)object
 {
-	__block NSString *objectName = [NSString stringWithFormat:@"%@", [object class]];
+	id vc = nil;
+	NSString *viewControllerKey = @"_viewDelegate";
+	if ([object respondsToSelector:NSSelectorFromString(viewControllerKey)]) {
+		vc = [object valueForKey:viewControllerKey];
+	}
+
+	__block NSString *objectName = vc ? [NSString stringWithFormat:@"%@ (%@)", [object class], [vc class]] :
+			[NSString stringWithFormat:@"%@", [object class]];
+
 	if (!self.objectNames)
 		return objectName;
 	
