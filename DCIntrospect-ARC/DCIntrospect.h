@@ -8,6 +8,7 @@
 #define kDCIntrospectNotificationIntrospectionDidEnd @"kDCIntrospectNotificationIntrospectionDidEnd"
 #define kDCIntrospectAnimationDuration 0.08
 
+#import <UIKit/UIKit.h>
 #import <objc/runtime.h>
 #include "TargetConditionals.h"
 
